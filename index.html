@@ -594,8 +594,28 @@
         <section id="posts-container"></section>
     </main>
 
-    <script>
-        const STORAGE_KEY = 'conectaedu_data';
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCOfNPxNcrxGBTQSjUXppN9GJnEQfcrDm4",
+            authDomain: "foro-conectaedu.firebaseapp.com",
+            projectId: "foro-conectaedu",
+            storageBucket: "foro-conectaedu.firebasestorage.app",
+            messagingSenderId: "183234856524",
+            appId: "1:183234856524:web:9cef8e98008740431196e9",
+            measurementId: "G-VWS4D8DM7B"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+        
+        // Referencia al documento único donde guardaremos todo el foro para simplificar la integración
+        const forumDocRef = doc(db, "forum_data", "posts_collection");
+
         let posts = [];
         let currentFilter = 'Todos';
         let currentCourseFilter = 'Todos';
@@ -626,18 +646,26 @@
         const adminLogoutBtn = document.getElementById('admin-logout-btn');
 
         function init() {
-            try {
-                const storedPosts = localStorage.getItem(STORAGE_KEY);
-                posts = storedPosts ? JSON.parse(storedPosts) : [];
-            } catch (e) {
-                posts = [];
-            }
-            renderPosts();
+            // Reemplazamos localStorage por lectura en tiempo real de Firestore
+            onSnapshot(forumDocRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    posts = docSnap.data().posts || [];
+                } else {
+                    posts = [];
+                }
+                renderPosts();
+            }, (error) => {
+                console.error("Error cargando de Firebase:", error);
+            });
+            
             setupEventListeners();
         }
 
         function saveToStorage() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+            // Reemplazamos localStorage por guardado en la nube
+            setDoc(forumDocRef, { posts: posts }).catch((error) => {
+                console.error("Error guardando en Firebase:", error);
+            });
         }
 
         function setupEventListeners() {
@@ -714,7 +742,6 @@
             if (confirm('¿Desea eliminar de forma permanente esta publicación del foro?')) {
                 posts = posts.filter(p => p.id !== id);
                 saveToStorage();
-                renderPosts();
             }
         };
 
@@ -724,7 +751,6 @@
                 if (post) {
                     post.replies = post.replies.filter(r => r.id !== replyId);
                     saveToStorage();
-                    renderPosts();
                 }
             }
         };
@@ -751,7 +777,6 @@
 
             posts.unshift(newPost);
             saveToStorage();
-            renderPosts(); 
             
             qaForm.reset();
             roleChips.forEach(c => c.classList.remove('active'));
@@ -771,7 +796,6 @@
                 };
                 posts[postIndex].replies.push(newReply);
                 saveToStorage();
-                renderPosts();
             }
         }
 
