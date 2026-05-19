@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>conectado.cl - Plataforma Institucional</title>
+    <title>conectado.cl - Red Institucional</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* ==========================================================================
-           SISTEMA DE DISEÑO: SLATE & SKY (Premium Light)
+           DISEÑO ORIGINAL: "CLEAR CLOUD SYSTEM" (PREMIUM LIGHT)
            ========================================================================== */
         * {
             box-sizing: border-box;
@@ -20,485 +20,357 @@
         }
 
         :root {
-            --bg-body: #f1f5f9;          
-            --bg-card: #ffffff;
-            --bg-input: #f8fafc;         
+            --bg-body: #e4e8f0;          
+            --bg-card: #f1f4f9;          
+            --bg-input: #e2e7f0;         
+            --bg-input-focus: #fafbfc;
             
-            --primary-dark: #0f172a;     
-            --primary: #1e293b;          
-            --accent: #0284c7;           
-            --accent-hover: #0369a1;
-            --success: #10b981;
-            --danger: #ef4444;
+            --accent: #4f46e5;           
+            --accent-hover: #4338ca;
+            --accent-glow: rgba(79, 70, 229, 0.15);
+            --success: #10b981;          
+            --danger: #ef4444;           /* Rojo para borrar */
             
-            --text-muted: #475569;       
-            --text-light: #64748b;
-            --border-soft: #e2e8f0;
-            --border-focus: #bae6fd;     
+            --color-comunicado: #0284c7;  
+            --bg-comunicado: rgba(2, 132, 199, 0.08);
+            --color-consulta: #b45309;    
+            --bg-consulta: rgba(180, 83, 9, 0.07);
+            --color-asignatura: #059669;
+            --bg-asignatura: rgba(16, 185, 129, 0.1);
+
+            --text-title: #1b253c;       
+            --text-body: #3c485e;        
+            --text-muted: #64748b;       
             
-            --shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
-            --radius-lg: 12px;
-            --radius-md: 8px;
+            --border-premium: rgba(0, 0, 0, 0.05);
+            --border-interactive: #cbd5e1;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            
+            --shadow-premium: 0 20px 40px -15px rgba(111, 126, 153, 0.15), 0 1px 3px rgba(0, 0, 0, 0.02);
+            --shadow-interactive: 0 4px 12px rgba(79, 70, 229, 0.08);
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
-            color: var(--primary);
+            color: var(--text-body);
             line-height: 1.6;
-            padding-bottom: 80px;
+            padding-bottom: 100px;
         }
 
-        /* ==========================================================================
-           HEADER INSTITUCIONAL Y CONTROL ADMIN
-           ========================================================================== */
+        /* HEADER ALINEADO A LA IZQUIERDA CON LOGO CORREGIDO */
         .main-header {
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border-soft);
-            padding: 20px 16px;
+            background-color: rgba(241, 244, 249, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-premium);
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.01);
         }
 
         .header-container {
-            max-width: 680px;
+            max-width: 1000px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Permite el botón admin a la derecha */
             align-items: center;
         }
 
-        .brand-wrapper {
+        .header-left {
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .logo-container {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden; 
-        }
-
-        .logo-svg {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .brand h1 {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--primary-dark);
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-light);
-            margin-top: 2px;
-        }
-
-        .btn-admin-toggle {
-            background-color: var(--bg-input);
-            border: 1px solid var(--border-soft);
-            color: var(--text-muted);
-            padding: 6px 12px;
-            font-size: 11px;
-            font-weight: 700;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.2s ease;
-        }
-
-        .btn-admin-toggle.logged-in {
-            background-color: #fef2f2;
-            border-color: #fca5a5;
-            color: var(--danger);
-        }
-
-        .main-content {
-            max-width: 680px;
-            margin: 32px auto;
-            padding: 0 16px;
-        }
-
-        /* ==========================================================================
-           FORMULARIOS Y CHIPS INTERACTIVOS
-           ========================================================================== */
-        .form-section {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            margin-bottom: 32px;
-            box-shadow: var(--shadow-card);
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: var(--primary-dark);
-            border-bottom: 2px solid var(--bg-body);
-            padding-bottom: 10px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
             gap: 16px;
         }
 
-        @media (min-width: 600px) {
-            .form-grid.triple { grid-template-columns: 1.2fr 0.9fr 0.9fr; }
-        }
-
-        .form-group {
+        /* CORRECCIÓN DEL LOGO: Medidas estrictas para evitar desbordes */
+        .logo-wrapper {
+            width: 44px;
+            height: 44px;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
         }
 
-        .form-group label, .label-block {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--primary);
+        .logo-svg {
+            width: 44px;
+            height: 44px;
+            filter: drop-shadow(0 4px 6px rgba(79, 70, 229, 0.15));
         }
 
-        .role-selector-container {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .brand h1 { font-size: 28px; font-weight: 800; color: var(--text-title); letter-spacing: -0.8px; }
+        .brand h1 span { color: var(--accent); }
+        .subtitle { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-top: 2px; }
 
-        .role-chip-btn {
-            position: relative;
-            flex: 1;
-            min-width: 100px;
-            font-family: inherit;
-            background-color: var(--bg-input);
+        /* MODO ADMINISTRADOR BOTÓN */
+        .btn-admin {
+            background: transparent;
+            border: 1px solid var(--text-muted);
             color: var(--text-muted);
-            border: 2px solid transparent;
-            padding: 10px 14px;
-            font-size: 13px;
-            font-weight: 600;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 700;
             border-radius: var(--radius-md);
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
+        .btn-admin:hover { background: var(--bg-input); color: var(--text-title); }
+        .btn-admin.active { background: #fee2e2; color: var(--danger); border-color: #fca5a5; }
 
-        .role-chip-btn.active {
-            background-color: var(--bg-card);
-            color: var(--accent);
-            border-color: var(--accent);
+        /* FORMULARIOS */
+        .main-content { max-width: 760px; margin: 40px auto; padding: 0 20px; }
+        .form-section { background-color: var(--bg-card); border: 1px solid var(--border-premium); border-radius: var(--radius-lg); padding: 36px; margin-bottom: 32px; box-shadow: var(--shadow-premium); }
+        .section-title { font-size: 20px; font-weight: 800; margin-bottom: 24px; color: var(--text-title); }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 600px) { .form-grid.triple { grid-template-columns: 1fr 1fr 1fr; } }
+        
+        .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+        .form-group label, .label-block { font-size: 12px; font-weight: 700; color: var(--text-title); text-transform: uppercase; letter-spacing: 0.6px; }
+
+        input[type="text"], select, textarea {
+            font-family: inherit; font-size: 14.5px; padding: 14px 18px; border: 1px solid transparent; 
+            border-radius: var(--radius-md); background-color: var(--bg-input); color: var(--text-title); 
+            outline: none; transition: all 0.25s ease; font-weight: 500;
         }
+        input:focus, select:focus, textarea:focus { background-color: var(--bg-input-focus); border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
+        .select-wrapper { position: relative; }
+        .select-wrapper select { width: 100%; appearance: none; cursor: pointer; }
 
+        /* BOTONES DE ROL (CHIPS CON CHECK VERDE) */
+        .role-selector-container { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+        .role-chip-btn {
+            position: relative; flex: 1; min-width: 120px; font-family: inherit; background-color: var(--bg-input);
+            color: var(--text-body); border: 2px solid transparent; padding: 12px 16px; font-size: 14px;
+            font-weight: 600; border-radius: var(--radius-md); cursor: pointer; display: flex; align-items: center;
+            justify-content: center; gap: 8px; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .role-chip-btn:hover { background-color: var(--border-interactive); color: var(--text-title); transform: translateY(-1px); }
+        
+        .role-chip-btn.active { background-color: var(--bg-card); color: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); transform: scale(1.02); font-weight: 700; }
         .role-chip-btn.active::after {
-            content: "✓";
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background-color: var(--success);
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            content: "✓"; position: absolute; top: -8px; right: -8px; background-color: var(--success); color: white;
+            font-size: 12px; font-weight: bold; width: 22px; height: 22px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
-
-        .form-group input, .form-group select, .form-group textarea {
-            font-family: inherit;
-            font-size: 14px;
-            padding: 12px 14px;
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-md);
-            background-color: var(--bg-input);
-            color: var(--primary-dark);
-            outline: none;
-        }
-
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--accent);
-            background-color: var(--bg-card);
-            box-shadow: 0 0 0 3px var(--border-focus);
-        }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .chip-icon { font-size: 16px; }
 
         .btn-submit {
-            display: block;
-            width: 100%;
-            background: linear-gradient(180deg, var(--accent) 0%, var(--accent-hover) 100%);
-            color: white;
-            border: 1px solid var(--accent-hover);
-            padding: 14px;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
+            display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; background: var(--accent);
+            color: #ffffff; border: none; padding: 16px; font-size: 15px; font-weight: 700; border-radius: var(--radius-md);
+            cursor: pointer; transition: all 0.2s ease;
         }
+        .btn-submit:hover:not(:disabled) { background: var(--accent-hover); box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25); transform: translateY(-1px); }
 
-        /* ==========================================================================
-           ÁREA DE FILTROS AVANZADOS (INCLUYE ASIGNATURAS CHILE)
-           ========================================================================== */
-        .filters-section {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-card);
-        }
-
-        .search-box { position: relative; margin-bottom: 16px; }
-        .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-light); }
-        .search-box input { width: 100%; padding: 12px 12px 12px 44px; font-size: 14px; border: 1px solid var(--border-soft); border-radius: var(--radius-md); outline: none; width: 100%; }
+        /* BÚSQUEDA Y FILTROS */
+        .filters-section { margin-bottom: 32px; display: flex; flex-direction: column; gap: 16px; }
+        .search-box { position: relative; }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .search-box input { width: 100%; padding: 16px 16px 16px 48px; background-color: var(--bg-card); border: 1px solid var(--border-premium); box-shadow: var(--shadow-premium); border-radius: var(--radius-lg); }
         
-        .filter-controls-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-        @media(min-width: 500px) {
-            .filter-controls-grid { grid-template-columns: 1fr 1fr; }
-        }
+        .filter-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .filter-controls select { padding: 12px 16px; border-radius: var(--radius-md); background-color: var(--bg-card); border: 1px solid var(--border-premium); font-size: 13.5px; font-weight: 600; color: var(--text-body); outline: none; cursor: pointer; box-shadow: var(--shadow-premium); }
 
-        .filter-select-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .filter-select-group label {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-light);
-            letter-spacing: 0.5px;
-        }
-        .filter-select-group select {
-            padding: 10px;
-            font-size: 13.5px;
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-md);
-            background-color: var(--bg-input);
-            outline: none;
-            width: 100%;
-        }
+        /* TARJETAS Y COMENTARIOS */
+        .post-card { background-color: var(--bg-card); border: 1px solid var(--border-premium); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow-premium); position: relative; }
+        .post-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+        .meta-user { display: flex; flex-direction: column; }
+        .post-author { font-weight: 800; font-size: 16px; color: var(--text-title); }
+        .post-role { font-size: 12.5px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px; }
+        .post-date { font-size: 11.5px; color: var(--text-muted); margin-top: 3px; }
 
-        /* ==========================================================================
-           FEED / MURO DE PUBLICACIONES
-           ========================================================================== */
-        .post-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-card);
-        }
-
-        .post-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 14px;
-        }
-
-        .author-box { display: flex; flex-direction: column; }
-        .post-author { font-weight: 700; font-size: 14.5px; color: var(--primary-dark); }
-        .post-role { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
-        .post-date { font-size: 12px; color: var(--text-light); }
-
-        .badges-wrapper { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-        .badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
-        .badge.comunicado { background-color: #f0f9ff; color: var(--accent-hover); border: 1px solid #bae6fd; }
-        .badge.consulta { background-color: #f8fafc; color: var(--text-muted); border: 1px solid var(--border-soft); }
-        .badge.subject { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
-
-        .post-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--primary-dark); }
-        .post-body { font-size: 14.5px; color: var(--text-muted); white-space: pre-line; }
-
-        .btn-delete-post {
-            background-color: #fef2f2;
-            border: 1px solid #fca5a5;
-            color: var(--danger);
-            padding: 4px 8px;
-            font-size: 11px;
-            font-weight: 700;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            margin-left: 6px;
-        }
-
-        .btn-delete-post:hover { background-color: var(--danger); color: white; }
-        .new-post-anim { animation: postPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-        @keyframes postPop { from { opacity: 0; transform: scale(0.97) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-
-        .empty-state { text-align: center; padding: 40px 20px; background-color: var(--bg-card); border: 2px dashed var(--border-soft); border-radius: var(--radius-lg); }
-        .empty-state h3 { font-size: 15px; color: var(--primary); margin-bottom: 4px; }
-        .empty-state p { font-size: 13.5px; color: var(--text-light); }
+        .badges-container { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: flex-end;}
+        .badge { font-size: 11px; font-weight: 800; padding: 6px 12px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge.comunicado { background-color: var(--bg-comunicado); color: var(--color-comunicado); }
+        .badge.consulta { background-color: var(--bg-consulta); color: var(--color-consulta); }
+        .badge.subject { background-color: var(--bg-asignatura); color: var(--color-asignatura); border: 1px solid rgba(16, 185, 129, 0.2); }
         
-        .spinner { animation: spin 0.8s linear infinite; width: 16px; height: 16px; margin-left: 6px; display: inline-block; vertical-align: middle; }
+        .btn-delete { background-color: var(--danger); color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-delete:hover { background-color: #dc2626; transform: scale(1.05); }
+
+        .post-title { font-size: 19px; font-weight: 800; margin-bottom: 12px; color: var(--text-title); line-height: 1.4; }
+        .post-body { font-size: 15px; color: var(--text-body); white-space: pre-line; }
+
+        /* HILOS DE RESPUESTAS (MANTENIDOS INTACTOS) */
+        .replies-container { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-premium); }
+        .replies-title { font-size: 13px; font-weight: 800; color: var(--text-title); margin-bottom: 14px; text-transform: uppercase; }
+        .reply-item { background-color: rgba(226, 231, 240, 0.4); border-left: 4px solid var(--accent); padding: 14px 18px; border-radius: 4px var(--radius-md) var(--radius-md) 4px; margin-bottom: 12px; position: relative;}
+        .reply-meta { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px; }
+        .reply-user { font-weight: 800; color: var(--text-title); }
+        .reply-role { color: var(--text-muted); font-weight: 600; font-size: 11.5px; margin-left: 4px; text-transform: uppercase; }
+        .reply-body { font-size: 14px; color: var(--text-body); }
+        
+        .reply-form { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .reply-mini-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        @media(min-width: 480px){ .reply-mini-grid { grid-template-columns: 1fr 1fr; } }
+        .input-reply-small { padding: 10px 14px; font-size: 13px; background-color: var(--bg-input); }
+        .btn-reply { align-self: flex-end; background-color: var(--text-title); color: #ffffff; border: none; padding: 8px 18px; font-size: 12.5px; font-weight: 700; border-radius: var(--radius-md); cursor: pointer; transition: all 0.2s; }
+        .btn-reply:hover { background-color: var(--accent); }
+
+        .transition-card { animation: cardArrival 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        .new-post-anim { animation: postPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+        @keyframes cardArrival { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes postPop { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .spinner { animation: spin 0.85s linear infinite; width: 20px; height: 20px; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .hidden { display: none !important; }
+        .empty-state { text-align: center; padding: 60px 30px; background-color: var(--bg-card); border: 2px dashed var(--border-interactive); border-radius: var(--radius-lg); box-shadow: var(--shadow-premium); }
+        .empty-state h3 { color: var(--text-title); font-size: 18px; font-weight: 800; margin-top: 14px; }
+        .empty-state p { color: var(--text-muted); font-size: 14.5px; margin-top: 4px; }
     </style>
 </head>
 <body>
 
     <header class="main-header">
         <div class="header-container">
-            <div class="brand-wrapper">
+            <div class="header-left">
                 <div class="brand">
-                    <div class="logo-container">
-                        <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <div class="logo-wrapper">
+                        <svg class="logo-svg" width="44" height="44" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
                             <defs>
-                                <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#312e81" />
-                                    <stop offset="100%" stop-color="#4f46e5" />
+                                <linearGradient id="netGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#4f46e5" />
+                                    <stop offset="100%" stop-color="#06b6d4" />
+                                </linearGradient>
+                                <linearGradient id="netGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#6366f1" />
+                                    <stop offset="100%" stop-color="#ec4899" />
                                 </linearGradient>
                             </defs>
-                            <path d="M26 12C32.627 12 38 16.477 38 22C38 27.523 32.627 32 26 32C24.4 32 22.88 31.7 21.5 31.18L16 34L17.2 29.5C14.6 27.6 14 24.9 14 22C14 16.477 19.373 12 26 12Z" fill="#e0e7ff" opacity="0.9"/>
-                            <path d="M14 8C20.627 8 26 12.477 26 18C26 23.523 20.627 28 14 28C12.4 28 10.88 27.7 9.5 27.18L4 30L5.2 25.5C2.6 23.6 2 20.9 2 18C2 12.477 7.373 8 14 8Z" fill="url(#brandGrad)"/>
+                            <circle cx="16" cy="16" r="6" fill="url(#netGrad1)" />
+                            <circle cx="34" cy="20" r="8" fill="url(#netGrad2)" />
+                            <circle cx="22" cy="36" r="5" fill="url(#netGrad1)" />
+                            <path d="M16 16 L34 20 M34 20 L22 36 M22 36 L16 16" stroke="#4f46e5" stroke-width="2.5" stroke-linecap="round" opacity="0.4" fill="none"/>
+                            <circle cx="25" cy="22" r="3" fill="#06b6d4" />
                         </svg>
                     </div>
-                    <h1>conectado.cl</h1>
+                    <h1>conectado<span>.cl</span></h1>
                 </div>
-                <p class="subtitle">Red de comunicación escolar chilena</p>
+                <p class="subtitle">Plataforma de Comunicación Escolar Integrada</p>
             </div>
-            <div>
-                <button type="button" class="btn-admin-toggle" id="admin-btn">Modo Admin</button>
-            </div>
+            <button id="admin-btn" class="btn-admin">Modo Admin</button>
         </div>
     </header>
 
     <main class="main-content">
-        <section class="form-section">
-            <h2 class="section-title">Crear Publicación</h2>
+        <section class="form-section transition-card">
+            <div class="section-header">
+                <h2 class="section-title">Crear Nueva Publicación</h2>
+            </div>
             <form id="qa-form">
                 <div class="form-grid triple">
                     <div class="form-group">
-                        <label for="author">Remitente</label>
-                        <input type="text" id="author" placeholder="Ej. Juan Valenzuela" required>
+                        <label for="author-name">Nombre Completo</label>
+                        <input type="text" id="author-name" placeholder="Ej. Juan Pablo Correa" required>
                     </div>
                     <div class="form-group">
                         <label for="category">Clasificación</label>
-                        <select id="category" required>
-                            <option value="Comunicado">📢 Comunicado</option>
-                            <option value="Consulta">❓ Consulta</option>
-                        </select>
+                        <div class="select-wrapper">
+                            <select id="category" required>
+                                <option value="Comunicado">📢 Aviso Oficial</option>
+                                <option value="Consulta">❓ Consulta</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="subject">Asignatura Relacionada</label>
-                        <select id="subject" required>
-                            <option value="General">💼 Institucional / General</option>
-                            <option value="Lenguaje">📚 Lenguaje y Comunicación</option>
-                            <option value="Matemáticas">📐 Matemáticas</option>
-                            <option value="Ciencias">🔬 Ciencias Naturales / Biología</option>
-                            <option value="Historia">🌍 Historia, Geografía y Cs. Sociales</option>
-                            <option value="Inglés">🇬🇧 Idioma Extranjero: Inglés</option>
-                            <option value="Artes">🎨 Artes Visuales / Música</option>
-                            <option value="Educación Física">🏃 Educación Física y Salud</option>
-                            <option value="Tecnología">💻 Tecnología / Informática</option>
-                            <option value="Orientación">🌱 Orientación / Jefatura</option>
-                        </select>
+                        <label for="subject">Asignatura</label>
+                        <div class="select-wrapper">
+                            <select id="subject" required>
+                                <option value="Institucional">💼 Institucional</option>
+                                <option value="Lenguaje">📚 Lenguaje</option>
+                                <option value="Matemáticas">📐 Matemáticas</option>
+                                <option value="Ciencias">🔬 Ciencias</option>
+                                <option value="Historia">🌍 Historia</option>
+                                <option value="Inglés">🇬🇧 Inglés</option>
+                                <option value="Artes / Ed. Física">🎨 Artes / Ed. Física</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="label-block">Selecciona tu Rol</label>
-                    <div class="role-selector-container">
-                        <button type="button" class="role-chip-btn" data-role="Docente">🏫 Docente</button>
-                        <button type="button" class="role-chip-btn" data-role="Apoderado">🏠 Apoderado</button>
-                        <button type="button" class="role-chip-btn" data-role="Funcionario">💼 Funcionario</button>
+                    <label class="label-block">Selecciona tu Rol (Requerido)</label>
+                    <div class="role-selector-container" id="role-selector-group">
+                        <button type="button" class="role-chip-btn" data-role="Docente"><span class="chip-icon">🏫</span> Docente</button>
+                        <button type="button" class="role-chip-btn" data-role="Apoderado"><span class="chip-icon">🏠</span> Apoderado</button>
+                        <button type="button" class="role-chip-btn" data-role="Funcionario"><span class="chip-icon">💼</span> Funcionario</button>
                     </div>
                     <input type="hidden" id="author-role" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Asunto</label>
-                    <input type="text" id="title" placeholder="Ej. Temario primera prueba sumativa..." required>
+                    <label for="title">Título o Asunto</label>
+                    <input type="text" id="title" placeholder="Ej. Citación a reunión..." required>
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Mensaje</label>
-                    <textarea id="message" rows="4" placeholder="Escribe los detalles aquí..." required></textarea>
+                    <label for="message">Detalle del Mensaje</label>
+                    <textarea id="message" rows="4" placeholder="Redacta la información clara para la comunidad..." required></textarea>
                 </div>
 
                 <button type="submit" class="btn-submit" id="submit-btn">
-                    <span class="btn-text">Publicar en el Muro</span>
-                    <svg class="spinner hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.3"></circle><path d="M12 2C6.47715 2 2 6.47715 2 12" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg>
+                    <span class="btn-text">Publicar en la Línea de Tiempo</span>
+                    <svg class="spinner hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.2"></circle><path d="M12 2C6.47715 2 2 6.47715 2 12" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg>
                 </button>
             </form>
         </section>
 
-        <section class="filters-section">
+        <section class="filters-section transition-card">
             <div class="search-box">
                 <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="search-input" placeholder="Buscar por palabra clave, nombre o texto...">
+                <input type="text" id="search-input" placeholder="Buscar por palabra clave o nombre...">
             </div>
             
-            <div class="filter-controls-grid">
-                <div class="filter-select-group">
-                    <label for="filter-category">Tipo de Entrada</label>
-                    <select id="filter-category">
-                        <option value="Todos">Ver todo el Muro</option>
-                        <option value="Comunicado">Solo Comunicados</option>
-                        <option value="Consulta">Solo Consultas</option>
-                    </select>
-                </div>
-                <div class="filter-select-group">
-                    <label for="filter-subject">Filtrar por Asignatura</label>
-                    <select id="filter-subject">
-                        <option value="Todos">Todas las Asignaturas</option>
-                        <option value="General">Institucional / General</option>
-                        <option value="Lenguaje">Lenguaje y Comunicación</option>
-                        <option value="Matemáticas">Matemáticas</option>
-                        <option value="Ciencias">Ciencias Naturales</option>
-                        <option value="Historia">Historia y Geografía</option>
-                        <option value="Inglés">Inglés</option>
-                        <option value="Artes">Artes / Música</option>
-                        <option value="Educación Física">Educación Física</option>
-                        <option value="Tecnología">Tecnología</option>
-                        <option value="Orientación">Orientación</option>
-                    </select>
-                </div>
+            <div class="filter-controls">
+                <select id="filter-category">
+                    <option value="Todos">Todos los tipos</option>
+                    <option value="Comunicado">Solo Avisos Oficiales</option>
+                    <option value="Consulta">Solo Consultas</option>
+                </select>
+                <select id="filter-subject">
+                    <option value="Todos">Todas las Asignaturas</option>
+                    <option value="Institucional">Institucional</option>
+                    <option value="Lenguaje">Lenguaje</option>
+                    <option value="Matemáticas">Matemáticas</option>
+                    <option value="Ciencias">Ciencias</option>
+                    <option value="Historia">Historia</option>
+                    <option value="Inglés">Inglés</option>
+                    <option value="Artes / Ed. Física">Artes / Ed. Física</option>
+                </select>
             </div>
         </section>
 
-        <section id="posts-container"></section>
+        <section class="feed-section">
+            <div id="posts-container"></div>
+        </section>
     </main>
 
     <script>
-        const STORAGE_KEY = 'conectado_forum_posts_v4_subjects';
+        // Nueva Key para evitar conflictos y guardar todo
+        const STORAGE_KEY = 'conectado_db_v_classic_final';
         let posts = [];
-        let filterCategory = 'Todos';
-        let filterSubject = 'Todos';
         let searchQuery = '';
+        let currentFilterCategory = 'Todos';
+        let currentFilterSubject = 'Todos';
         let isAdmin = false;
 
         const qaForm = document.getElementById('qa-form');
         const postsContainer = document.getElementById('posts-container');
         const searchInput = document.getElementById('search-input');
-        const selectFilterCategory = document.getElementById('filter-category');
-        const selectFilterSubject = document.getElementById('filter-subject');
-        
+        const filterCategory = document.getElementById('filter-category');
+        const filterSubject = document.getElementById('filter-subject');
         const submitBtn = document.getElementById('submit-btn');
         const btnText = submitBtn.querySelector('.btn-text');
         const spinner = submitBtn.querySelector('.spinner');
@@ -517,6 +389,10 @@
             setupEventListeners();
         }
 
+        function saveToStorage() {
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(posts)); } catch (e) {}
+        }
+
         function setupEventListeners() {
             qaForm.addEventListener('submit', handleCreatePost);
 
@@ -525,13 +401,13 @@
                 renderPosts();
             });
 
-            selectFilterCategory.addEventListener('change', (e) => {
-                filterCategory = e.target.value;
+            filterCategory.addEventListener('change', (e) => {
+                currentFilterCategory = e.target.value;
                 renderPosts();
             });
 
-            selectFilterSubject.addEventListener('change', (e) => {
-                filterSubject = e.target.value;
+            filterSubject.addEventListener('change', (e) => {
+                currentFilterSubject = e.target.value;
                 renderPosts();
             });
 
@@ -543,27 +419,45 @@
                 });
             });
 
-            adminBtn.addEventListener('click', handleAdminToggle);
+            adminBtn.addEventListener('click', toggleAdmin);
         }
 
-        function handleAdminToggle() {
-            if (isAdmin) {
+        function toggleAdmin() {
+            if(isAdmin) {
                 isAdmin = false;
                 adminBtn.textContent = "Modo Admin";
-                adminBtn.classList.remove('logged-in');
+                adminBtn.classList.remove('active');
                 renderPosts();
-                alert('Sesión de administrador cerrada.');
             } else {
-                const user = prompt('Usuario Administrador:');
-                const pass = prompt('Contraseña:');
-                if (user === 'admin' && pass === 'admin') {
+                const u = prompt("Usuario:");
+                const p = prompt("Contraseña:");
+                if(u === 'admin' && p === 'admin') {
                     isAdmin = true;
                     adminBtn.textContent = "Salir Admin";
-                    adminBtn.classList.add('logged-in');
+                    adminBtn.classList.add('active');
                     renderPosts();
-                    alert('¡Acceso concedido! Modo administrador activo para remover elementos.');
                 } else {
-                    alert('Credenciales incorrectas.');
+                    alert("Credenciales incorrectas.");
+                }
+            }
+        }
+
+        // Lógica de borrar (accesible de forma global para los botones)
+        window.deletePost = function(id) {
+            if(confirm("¿Eliminar publicación permanentemente?")) {
+                posts = posts.filter(p => p.id !== id);
+                saveToStorage();
+                renderPosts();
+            }
+        }
+
+        window.deleteReply = function(postId, replyId) {
+            if(confirm("¿Eliminar este comentario?")) {
+                const post = posts.find(p => p.id === postId);
+                if(post) {
+                    post.replies = post.replies.filter(r => r.id !== replyId);
+                    saveToStorage();
+                    renderPosts();
                 }
             }
         }
@@ -571,47 +465,54 @@
         function handleCreatePost(e) {
             e.preventDefault();
             if (!hiddenRoleInput.value) {
-                alert('Por favor, selecciona un Rol corporativo.');
+                alert('Selecciona tu Rol antes de publicar.');
                 return;
             }
 
             submitBtn.disabled = true;
-            btnText.textContent = 'Enviando al servidor...';
+            btnText.textContent = 'Procesando...';
             spinner.classList.remove('hidden');
 
             setTimeout(() => {
                 const newPost = {
                     id: 'post_' + Date.now(),
-                    author: document.getElementById('author').value.trim(),
-                    role: hiddenRoleInput.value,
+                    authorName: document.getElementById('author-name').value.trim(),
+                    authorRole: hiddenRoleInput.value,
                     category: document.getElementById('category').value,
                     subject: document.getElementById('subject').value,
                     title: document.getElementById('title').value.trim(),
                     message: document.getElementById('message').value.trim(),
-                    date: new Date().toLocaleString('es-CL', { 
-                        day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' 
-                    })
+                    date: new Date().toLocaleString('es-CL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }),
+                    replies: []
                 };
 
                 posts.unshift(newPost);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+                saveToStorage();
+                renderPosts(newPost.id); 
                 
-                renderPosts(newPost.id);
                 qaForm.reset();
                 roleChips.forEach(c => c.classList.remove('active'));
                 hiddenRoleInput.value = '';
-
                 submitBtn.disabled = false;
-                btnText.textContent = 'Publicar en el Muro';
+                btnText.textContent = 'Publicar en la Línea de Tiempo';
                 spinner.classList.add('hidden');
             }, 500);
         }
 
-        function deletePost(postId) {
-            if (!isAdmin) return;
-            if (confirm('¿Desea borrar permanentemente este registro?')) {
-                posts = posts.filter(p => p.id !== postId);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+        function handleCreateReply(e, postId) {
+            e.preventDefault();
+            const form = e.target;
+            const postIndex = posts.findIndex(p => p.id === postId);
+            if (postIndex !== -1) {
+                const newReply = {
+                    id: 'reply_' + Date.now(),
+                    authorName: form.querySelector('.reply-name').value.trim(),
+                    authorRole: form.querySelector('.reply-role').value.trim(),
+                    message: form.querySelector('.reply-body-input').value.trim(),
+                    date: new Date().toLocaleString('es-CL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
+                };
+                posts[postIndex].replies.push(newReply);
+                saveToStorage();
                 renderPosts();
             }
         }
@@ -619,58 +520,92 @@
         function renderPosts(newPostId = null) {
             postsContainer.innerHTML = '';
 
-            const filtered = posts.filter(post => {
-                const matchesCategory = (filterCategory === 'Todos' || post.category === filterCategory);
-                const matchesSubject = (filterSubject === 'Todos' || post.subject === filterSubject);
-                const matchesSearch = (
+            const filteredPosts = posts.filter(post => {
+                const matchCat = (currentFilterCategory === 'Todos' || post.category === currentFilterCategory);
+                const matchSub = (currentFilterSubject === 'Todos' || post.subject === currentFilterSubject);
+                const matchSearch = (
                     post.title.toLowerCase().includes(searchQuery) ||
                     post.message.toLowerCase().includes(searchQuery) ||
-                    post.author.toLowerCase().includes(searchQuery)
+                    post.authorName.toLowerCase().includes(searchQuery)
                 );
-                return matchesCategory && matchesSubject && matchesSearch;
+                return matchCat && matchSub && matchSearch;
             });
 
-            if (filtered.length === 0) {
+            if (filteredPosts.length === 0) {
                 postsContainer.innerHTML = `
-                    <div class="empty-state">
-                        <h3>Muro vacío</h3>
-                        <p>No se encontraron publicaciones con los filtros seleccionados.</p>
-                    </div>
-                `;
+                    <div class="empty-state transition-card">
+                        <h3>Línea de tiempo vacía</h3>
+                        <p>No hay mensajes que coincidan con la búsqueda o filtros.</p>
+                    </div>`;
                 return;
             }
 
-            filtered.forEach(post => {
+            filteredPosts.forEach(post => {
                 const isNew = post.id === newPostId;
+                const badgeClass = post.category === 'Comunicado' ? 'comunicado' : 'consulta';
                 const card = document.createElement('article');
-                card.className = `post-card ${isNew ? 'new-post-anim' : ''}`;
+                card.className = `post-card ${isNew ? 'new-post-anim' : 'transition-card'}`;
 
-                const catBadge = post.category === 'Comunicado' ? 'comunicado' : 'consulta';
-                const subLabel = document.querySelector(`#subject option[value="${post.subject}"]`)?.text || post.subject;
+                let repliesHTML = '';
+                if (post.replies && post.replies.length > 0) {
+                    repliesHTML = post.replies.map(reply => `
+                        <div class="reply-item">
+                            <div class="reply-meta">
+                                <div>
+                                    <span class="reply-user">${escapeHTML(reply.authorName)}</span>
+                                    <span class="reply-role">• ${escapeHTML(reply.authorRole)}</span>
+                                </div>
+                                <div style="display:flex; gap:8px; align-items:center;">
+                                    <span class="reply-date">${reply.date}</span>
+                                    ${isAdmin ? `<button class="btn-delete" onclick="deleteReply('${post.id}', '${reply.id}')">X</button>` : ''}
+                                </div>
+                            </div>
+                            <p class="reply-body">${escapeHTML(reply.message)}</p>
+                        </div>
+                    `).join('');
+                }
 
                 card.innerHTML = `
                     <div class="post-header">
-                        <div class="author-box">
-                            <span class="post-author">${escapeHTML(post.author)}</span>
-                            <span class="post-role">${escapeHTML(post.role)}</span>
+                        <div class="meta-user">
+                            <span class="post-author">${escapeHTML(post.authorName)}</span>
+                            <span class="post-role">${escapeHTML(post.authorRole)}</span>
                             <span class="post-date">${post.date}</span>
                         </div>
-                        <div class="badges-wrapper">
-                            <span class="badge ${catBadge}">${post.category}</span>
-                            <span class="badge subject">${subLabel.split(' ').slice(0,2).join(' ')}</span>
-                            ${isAdmin ? `<button class="btn-delete-post" onclick="deletePost('${post.id}')">Eliminar</button>` : ''}
+                        <div class="badges-container">
+                            <span class="badge ${badgeClass}">${post.category}</span>
+                            <span class="badge subject">${post.subject || 'General'}</span>
+                            ${isAdmin ? `<button class="btn-delete" onclick="deletePost('${post.id}')">Eliminar</button>` : ''}
                         </div>
                     </div>
                     <h3 class="post-title">${escapeHTML(post.title)}</h3>
                     <p class="post-body">${escapeHTML(post.message)}</p>
+
+                    <div class="replies-container">
+                        ${post.replies.length > 0 ? `<h4 class="replies-title">Respuestas (${post.replies.length})</h4>` : ''}
+                        <div class="replies-list">${repliesHTML}</div>
+                        
+                        <form class="reply-form" data-postid="${post.id}">
+                            <div class="reply-mini-grid">
+                                <input type="text" placeholder="Tu nombre" class="input-reply-small reply-name" required>
+                                <input type="text" placeholder="Tu rol (ej. Apoderado)" class="input-reply-small reply-role" required>
+                            </div>
+                            <input type="text" placeholder="Añadir comentario oficial al hilo..." class="input-reply-small reply-body-input" required>
+                            <button type="submit" class="btn-reply">Comentar</button>
+                        </form>
+                    </div>
                 `;
+
+                const replyForm = card.querySelector('.reply-form');
+                replyForm.addEventListener('submit', (e) => handleCreateReply(e, post.id));
+
                 postsContainer.appendChild(card);
             });
         }
 
         function escapeHTML(str) {
             if (!str) return '';
-            return str.replace(/[&<>'"]/g, t => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[t] || t));
+            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
         }
 
         document.addEventListener('DOMContentLoaded', init);
