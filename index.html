@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>conectado.cl - Plataforma Institucional</title>
+    <title>Conecta Edu - Plataforma Institucional</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* ==========================================================================
-           PALETA DE COLORES Y VARIABLES GLOBALES (SLATE & SKY)
+           PALETA DE COLORES Y VARIABLES GLOBALES
            ========================================================================== */
         * {
             box-sizing: border-box;
@@ -20,30 +20,27 @@
         }
 
         :root {
-            /* Fondos Claros y Profesionales */
-            --bg-body: #f1f5f9;          
+            --bg-body: #f8fafc;          
             --bg-card: #ffffff;
-            --bg-input: #f8fafc;         
+            --bg-input: #f1f5f9;         
             
-            /* Acentos y Textos */
             --primary-dark: #0f172a;     
-            --primary: #1e293b;          
-            --accent: #0284c7;           
-            --accent-hover: #0369a1;
-            --accent-glow: rgba(2, 132, 199, 0.15);
+            --primary: #334155;          
+            --accent: #2563eb;           
+            --accent-hover: #1d4ed8;
+            --accent-glow: rgba(37, 99, 235, 0.15);
             
-            --success: #10b981;          
-            --danger: #ef4444;           
+            --success: #059669;          
+            --danger: #dc2626;           
             
-            --text-muted: #475569;       
-            --text-light: #64748b;
+            --text-muted: #64748b;       
+            --text-light: #94a3b8;
             
-            /* Bordes y Sombras */
             --border-soft: #e2e8f0;
-            --border-focus: #bae6fd;     
-            --shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
-            --radius-lg: 12px;
-            --radius-md: 8px;
+            --border-focus: #bfdbfe;     
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --radius-lg: 16px;
+            --radius-md: 10px;
         }
 
         body {
@@ -51,7 +48,7 @@
             background-color: var(--bg-body);
             color: var(--primary);
             line-height: 1.6;
-            padding-bottom: 60px;
+            padding-bottom: 80px;
             overflow-x: hidden;
         }
 
@@ -59,88 +56,81 @@
            ENCABEZADO INSTITUCIONAL
            ========================================================================== */
         .main-header {
-            background-color: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border-soft);
-            padding: 24px 16px;
+            padding: 16px 20px;
             position: sticky;
             top: 0;
             z-index: 900;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
         .header-container {
-            max-width: 720px;
+            max-width: 800px;
             margin: 0 auto;
-            position: relative;
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .brand {
+        .brand-section {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 4px;
         }
 
         .logo-svg {
-            width: 36px;
-            height: 36px;
-            filter: drop-shadow(0 4px 6px rgba(2, 132, 199, 0.15));
+            width: 38px;
+            height: 38px;
         }
 
-        .brand h1 {
-            font-size: 26px;
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text h1 {
+            font-size: 22px;
             font-weight: 800;
             color: var(--primary-dark);
             letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
         .subtitle {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
-            color: var(--text-light);
+            color: var(--text-muted);
         }
 
-        /* Botón superior de Administración */
-        .admin-toggle-btn {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: transparent;
-            color: var(--text-light);
+        /* Botón de Entrada (Admin) */
+        .btn-entrar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--bg-input);
+            color: var(--primary-dark);
             border: 1px solid var(--border-soft);
-            padding: 8px 14px;
-            font-size: 12px;
+            padding: 8px 16px;
+            font-size: 14px;
             font-weight: 600;
-            border-radius: var(--radius-md);
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .admin-toggle-btn:hover {
-            background-color: var(--bg-input);
-            color: var(--primary-dark);
-            border-color: var(--text-light);
-        }
-
-        @media (max-width: 640px) {
-            .admin-toggle-btn {
-                position: static;
-                transform: none;
-                margin-top: 16px;
-            }
+        .btn-entrar:hover {
+            background-color: var(--primary-dark);
+            color: white;
+            border-color: var(--primary-dark);
         }
 
         /* ==========================================================================
            CONTENEDOR CENTRAL Y FORMULARIOS
            ========================================================================== */
         .main-content {
-            max-width: 720px;
+            max-width: 800px;
             margin: 32px auto;
             padding: 0 16px;
         }
@@ -150,7 +140,7 @@
             border: 1px solid var(--border-soft);
             border-radius: var(--radius-lg);
             padding: 32px;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             box-shadow: var(--shadow-card);
         }
 
@@ -159,8 +149,9 @@
             font-weight: 700;
             margin-bottom: 24px;
             color: var(--primary-dark);
-            border-bottom: 2px solid var(--bg-body);
-            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .form-grid {
@@ -177,8 +168,8 @@
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 6px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
@@ -188,16 +179,17 @@
         }
 
         /* Inputs Generales */
-        input[type="text"], select, textarea, .input-reply {
+        input[type="text"], input[type="password"], select, textarea, .input-reply {
             font-family: inherit;
             font-size: 14px;
-            padding: 12px 14px;
+            padding: 14px;
             border: 1px solid var(--border-soft);
             border-radius: var(--radius-md);
             background-color: var(--bg-input);
             color: var(--primary-dark);
             outline: none;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
+            width: 100%;
         }
 
         input:focus, select:focus, textarea:focus, .input-reply:focus {
@@ -206,8 +198,19 @@
             box-shadow: 0 0 0 3px var(--border-focus);
         }
 
-        .select-wrapper { position: relative; }
-        .select-wrapper select { width: 100%; appearance: none; cursor: pointer; }
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper select {
+            appearance: none; 
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px top 50%;
+            background-size: 10px auto;
+            padding-right: 40px;
+        }
 
         /* ==========================================================================
            BOTONES DE ROL (CHIPS INTERACTIVOS)
@@ -216,61 +219,34 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: 4px;
         }
 
         .role-chip-btn {
-            position: relative;
             flex: 1;
             min-width: 100px;
             font-family: inherit;
-            background-color: var(--bg-input);
+            background-color: var(--bg-card);
             color: var(--text-muted);
-            border: 2px solid transparent;
-            padding: 10px 14px;
+            border: 1px solid var(--border-soft);
+            padding: 12px 14px;
             font-size: 13px;
             font-weight: 600;
             border-radius: var(--radius-md);
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
             transition: all 0.2s ease;
         }
 
         .role-chip-btn:hover {
-            background-color: var(--border-soft);
+            border-color: var(--text-light);
             color: var(--primary-dark);
         }
 
         .role-chip-btn.active {
-            background-color: var(--bg-card);
+            background-color: #eff6ff;
             color: var(--accent);
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
+            font-weight: 700;
         }
-
-        /* Check visual verde flotante */
-        .role-chip-btn.active::after {
-            content: "✓";
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background-color: var(--success);
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            animation: popIn 0.3s forwards;
-        }
-        @keyframes popIn { 0%{transform:scale(0);} 100%{transform:scale(1);} }
 
         /* Botón de Publicar Principal */
         .btn-submit {
@@ -278,38 +254,38 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            background: linear-gradient(180deg, var(--accent) 0%, var(--accent-hover) 100%);
+            background-color: var(--accent);
             color: white;
-            border: 1px solid var(--accent-hover);
-            padding: 14px;
+            border: none;
+            padding: 16px;
             font-size: 15px;
             font-weight: 600;
             border-radius: var(--radius-md);
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
-            transition: all 0.2s ease;
+            transition: background-color 0.2s ease;
+            margin-top: 8px;
         }
 
-        .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(2, 132, 199, 0.3); }
+        .btn-submit:hover { background-color: var(--accent-hover); }
 
         /* ==========================================================================
            BÚSQUEDA Y FILTROS DEL MURO
            ========================================================================== */
-        .filters-section { padding: 24px 32px; }
-        
-        .search-box { position: relative; margin-bottom: 16px; }
-        .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-light); }
-        .search-box input { width: 100%; padding: 14px 14px 14px 44px; border-radius: var(--radius-lg); }
+        .search-box { position: relative; margin-bottom: 20px; }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-light); }
+        .search-box input { padding: 16px 16px 16px 48px; border-radius: var(--radius-lg); font-size: 15px;}
 
-        .filter-tabs { display: flex; gap: 10px; margin-bottom: 16px; overflow-x: auto; }
-        .filter-btn { font-size: 13px; font-weight: 600; padding: 8px 18px; border: 1px solid var(--border-soft); background-color: var(--bg-card); color: var(--text-muted); border-radius: 20px; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+        .filter-tabs { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; }
+        .filter-btn { font-size: 13px; font-weight: 600; padding: 10px 20px; border: 1px solid var(--border-soft); background-color: var(--bg-card); color: var(--text-muted); border-radius: 24px; cursor: pointer; transition: 0.2s; white-space: nowrap; }
         .filter-btn.active { background-color: var(--primary-dark); color: white; border-color: var(--primary-dark); }
 
-        .filters-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .filter-select { font-family: inherit; font-size: 13px; padding: 10px; border: 1px solid var(--border-soft); border-radius: var(--radius-md); outline: none; cursor: pointer; }
+        .filters-row { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        @media (min-width: 600px) {
+            .filters-row { grid-template-columns: 1fr 1fr; }
+        }
 
         /* ==========================================================================
-           TARJETAS DEL MURO Y COMENTARIOS
+           TARJETAS DEL MURO Y COMENTARIOS (FORO)
            ========================================================================== */
         .post-card {
             background-color: var(--bg-card);
@@ -321,66 +297,54 @@
         }
 
         .post-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;}
-        .post-author { font-weight: 700; font-size: 15px; color: var(--primary-dark); }
-        .post-role { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-top: 2px;}
-        .post-date { font-size: 12px; color: var(--text-light); display: block; margin-top: 2px; }
-
-        .badge-wrapper { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;}
-        .badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
-        .badge.comunicado { background-color: #f0f9ff; color: var(--accent-hover); border: 1px solid #bae6fd; }
-        .badge.consulta { background-color: var(--bg-input); color: var(--text-muted); border: 1px solid var(--border-soft); }
-        .badge-course { background-color: #faf5ff; color: #7e22ce; border: 1px solid #e9d5ff; }
+        .post-author { font-weight: 700; font-size: 16px; color: var(--primary-dark); }
+        .post-role { font-size: 12px; color: var(--text-muted); font-weight: 500; display: block; margin-top: 2px;}
+        
+        .badge-wrapper { display: flex; gap: 8px; flex-wrap: wrap;}
+        .badge { font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;}
+        .badge.comunicado { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .badge.consulta { background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+        .badge-course { background-color: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
         .badge-subject { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 
         .post-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--primary-dark); }
-        .post-body { font-size: 15px; color: var(--text-muted); line-height: 1.6; white-space: pre-line; }
+        .post-body { font-size: 15px; color: var(--primary); line-height: 1.7; white-space: pre-line; }
+        .post-date-bottom { font-size: 12px; color: var(--text-light); margin-top: 16px; display: block; }
 
-        /* Hilo de Respuestas */
-        .replies-container { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-soft); }
-        .replies-title { font-size: 12px; font-weight: 800; color: var(--text-light); margin-bottom: 12px; text-transform: uppercase; }
+        /* Hilo de Respuestas (Foro) */
+        .replies-container { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-soft); }
+        .replies-title { font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 16px; }
         
-        .reply-item { background-color: var(--bg-input); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 4px var(--radius-md) var(--radius-md) 4px; margin-bottom: 10px; }
-        .reply-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-        .reply-user { font-weight: 700; font-size: 13px; color: var(--primary-dark); }
-        .reply-role { font-size: 11px; color: var(--text-light); margin-left: 6px;}
-        .reply-date { font-size: 11px; color: var(--text-muted); }
-        .reply-body { font-size: 13.5px; color: var(--primary); }
+        .reply-item { background-color: var(--bg-input); padding: 16px; border-radius: var(--radius-md); margin-bottom: 12px; }
+        .reply-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .reply-user { font-weight: 700; font-size: 14px; color: var(--primary-dark); }
+        .reply-date { font-size: 11px; color: var(--text-light); }
+        .reply-body { font-size: 14px; color: var(--primary); line-height: 1.5;}
 
         /* Formulario Interno de Respuestas */
-        .reply-form { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
-        .reply-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .input-reply { padding: 10px; font-size: 13px; }
-        .btn-reply { align-self: flex-end; background-color: transparent; color: var(--accent); border: 1px solid var(--accent); padding: 6px 16px; font-size: 12px; font-weight: 700; border-radius: var(--radius-md); cursor: pointer; transition: 0.2s; }
-        .btn-reply:hover { background-color: var(--accent); color: white; }
-
-        /* Controles de Administración (Borrado) */
-        .btn-moderator-delete { background: #fee2e2; color: #ef4444; border: 1px solid #fca5a5; padding: 6px 12px; font-size: 11px; font-weight: 700; border-radius: var(--radius-md); cursor: pointer; transition: 0.2s; margin-top: 16px; display: inline-block; }
-        .btn-moderator-delete:hover { background: #fca5a5; color: #b91c1c; }
+        .reply-form { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+        .reply-mini-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; }
+        @media (max-width: 500px) { .reply-mini-grid { grid-template-columns: 1fr; } }
         
-        .btn-reply-delete { background: none; border: none; color: var(--danger); font-size: 11px; font-weight: 700; cursor: pointer; margin-left: 8px;}
-        .btn-reply-delete:hover { text-decoration: underline; }
+        .btn-reply { align-self: flex-end; background-color: var(--primary-dark); color: white; border: none; padding: 10px 20px; font-size: 13px; font-weight: 600; border-radius: var(--radius-md); cursor: pointer; transition: 0.2s; }
+        .btn-reply:hover { background-color: #000; }
 
-        /* Animaciones */
-        .fade-in-up { animation: fadeInUp 0.5s ease both; }
-        .new-post-anim { animation: postPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-        @keyframes fadeInUp { from { opacity:0; transform: translateY(15px); } to { opacity:1; transform: translateY(0); } }
-        @keyframes postPop { from { opacity:0; transform: scale(0.97) translateY(10px); } to { opacity:1; transform: scale(1) translateY(0); } }
-        
-        .spinner { animation: spin 0.8s linear infinite; width: 16px; height: 16px; margin-left: 6px; display: inline-block; vertical-align: middle; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .hidden { display: none !important; }
+        /* Controles de Moderación (Admin) */
+        .btn-moderator-delete { background: #fee2e2; color: #ef4444; border: 1px solid #fca5a5; padding: 8px 16px; font-size: 12px; font-weight: 600; border-radius: var(--radius-md); cursor: pointer; transition: 0.2s; margin-top: 16px; display: inline-block; }
+        .btn-reply-delete { background: none; border: none; color: var(--danger); font-size: 12px; font-weight: 700; cursor: pointer; margin-left: 12px;}
 
         /* ==========================================================================
-           BARRA LATERAL DE ADMINISTRACIÓN FORMAL (SIDEBAR)
+           BARRA LATERAL DE ADMINISTRACIÓN (SIDEBAR)
            ========================================================================== */
         .admin-sidebar {
             position: fixed;
             top: 0;
-            right: -360px;
-            width: 360px;
+            right: -400px;
+            width: 400px;
+            max-width: 100%;
             height: 100%;
             background-color: var(--bg-card);
-            box-shadow: -4px 0 24px rgba(15, 23, 42, 0.15);
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
             z-index: 1001;
             transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -395,8 +359,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(2px);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
@@ -405,116 +369,127 @@
         .sidebar-overlay.show { opacity: 1; visibility: visible; }
 
         .sidebar-header {
-            padding: 24px 20px;
+            padding: 24px;
             border-bottom: 1px solid var(--border-soft);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: var(--bg-input);
         }
 
-        .sidebar-header h2 { font-size: 16px; font-weight: 700; color: var(--primary-dark); text-transform: uppercase; letter-spacing: 0.5px;}
-        .sidebar-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-light); }
+        .sidebar-header h2 { font-size: 18px; font-weight: 700; color: var(--primary-dark); }
+        .sidebar-close { background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text-muted); line-height: 1; }
 
-        .sidebar-content { padding: 24px 20px; flex: 1; overflow-y: auto; }
-        .sidebar-desc { font-size: 13px; color: var(--text-light); margin-bottom: 24px; }
+        .sidebar-content { padding: 24px; flex: 1; overflow-y: auto; }
+        .sidebar-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5;}
 
-        .admin-status-box {
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            padding: 16px;
-            border-radius: var(--radius-md);
-            color: #166534;
-            font-size: 14px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+        .admin-status-box { background-color: #f0fdf4; border: 1px solid #bbf7d0; padding: 16px; border-radius: var(--radius-md); color: #166534; font-size: 14px; margin-bottom: 24px; text-align: center; }
+        .btn-danger { background: #ef4444 !important; }
+        .hidden { display: none !important; }
 
-        .btn-danger { background: #ef4444 !important; border-color: #dc2626 !important; }
-        .btn-danger:hover { box-shadow: 0 4px 8px rgba(239, 68, 68, 0.25) !important; }
-
-        @media (max-width: 400px) {
-            .admin-sidebar { width: 100%; right: -100%; }
+        /* Ajustes de optimización para móviles */
+        @media (max-width: 600px) {
+            .form-section, .filters-section, .post-card { padding: 20px; }
+            .brand-text h1 { font-size: 18px; }
+            .btn-entrar span { display: none; } /* En pantallas chicas solo muestra el ícono de entrada */
+            input[type="text"], input[type="password"], select, textarea, .input-reply, .btn-submit, .btn-reply, .role-chip-btn {
+                min-height: 44px; /* Altura ideal recomendada para toques táctiles móviles */
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    
     <aside class="admin-sidebar" id="admin-sidebar">
         <div class="sidebar-header">
-            <h2>Gestión Institucional</h2>
+            <h2>Acceso Administrativo</h2>
             <button class="sidebar-close" id="sidebar-close">&times;</button>
         </div>
         
         <div class="sidebar-content" id="admin-login-view">
-            <p class="sidebar-desc">Inicie sesión con sus credenciales formales para acceder a las herramientas de moderación del muro.</p>
+            <p class="sidebar-desc">Ingrese sus credenciales de moderador para gestionar el foro institucional. (Usuario: <strong>admin</strong> / Clave: <strong>admin</strong>)</p>
             <div class="form-group">
-                <label>Usuario de Red</label>
-                <input type="text" id="admin-user" placeholder="Ej. admin">
+                <label>Usuario Institucional</label>
+                <input type="text" id="admin-user" placeholder="Ej. administrador">
             </div>
             <div class="form-group">
                 <label>Contraseña</label>
                 <input type="password" id="admin-pass" placeholder="••••••••">
             </div>
-            <button class="btn-submit" id="admin-login-btn">Autenticar Ingreso</button>
+            <button class="btn-submit" id="admin-login-btn">Iniciar Sesión</button>
         </div>
 
         <div class="sidebar-content hidden" id="admin-dashboard-view">
             <div class="admin-status-box">
                 <p><strong>✅ Modo Administrador Activo</strong></p>
             </div>
-            <p class="sidebar-desc">Ahora dispone de facultades para eliminar publicaciones y comentarios directamente desde la vista del muro.</p>
-            <button class="btn-submit btn-danger" id="admin-logout-btn">Cerrar Sesión Segura</button>
+            <p class="sidebar-desc">Ahora tienes permisos para supervisar y eliminar publicaciones o comentarios fuera de lugar en la plataforma.</p>
+            <button class="btn-submit btn-danger" id="admin-logout-btn">Cerrar Sesión</button>
         </div>
     </aside>
 
     <header class="main-header">
         <div class="header-container">
-            <div class="brand">
-                <svg class="logo-svg" viewBox="0 0 40 40" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <div class="brand-section">
+                <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#312e81" />
-                            <stop offset="100%" stop-color="#4f46e5" />
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#2563eb" />
+                            <stop offset="100%" stop-color="#0f172a" />
                         </linearGradient>
                     </defs>
-                    <path d="M26 12C32.627 12 38 16.477 38 22C38 27.523 32.627 32 26 32C24.4 32 22.88 31.7 21.5 31.18L16 34L17.2 29.5C14.6 27.6 14 24.9 14 22C14 16.477 19.373 12 26 12Z" fill="#e0e7ff" opacity="0.9"/>
-                    <path d="M14 8C20.627 8 26 12.477 26 18C26 23.523 20.627 28 14 28C12.4 28 10.88 27.7 9.5 27.18L4 30L5.2 25.5C2.6 23.6 2 20.9 2 18C2 12.477 7.373 8 14 8Z" fill="url(#brandGrad)"/>
+                    <path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20" stroke="url(#grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z" stroke="url(#grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <h1>conectado.cl</h1>
+                <div class="brand-text">
+                    <h1>Conecta Edu</h1>
+                    <span class="subtitle">Foro Académico Institucional</span>
+                </div>
             </div>
-            <p class="subtitle">Red de comunicación escolar</p>
-            <button id="admin-toggle-btn" class="admin-toggle-btn">Panel Admin</button>
+            <button id="admin-toggle-btn" class="btn-entrar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                <span>Entrar</span>
+            </button>
         </div>
     </header>
 
     <main class="main-content">
         
-        <section class="form-section fade-in-up">
-            <div class="section-header">
-                <h2 class="section-title">Crear Publicación</h2>
-            </div>
+        <section class="form-section">
+            <h2 class="section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Crear Nueva Publicación
+            </h2>
             <form id="qa-form">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="author">Remitente</label>
-                        <input type="text" id="author" placeholder="Ej. Prof. María Inés" required>
+                        <label for="author">Tu Nombre</label>
+                        <input type="text" id="author" placeholder="Ej. Prof. Alejandro Silva" required>
                     </div>
                     <div class="form-group">
-                        <label for="category">Clasificación</label>
-                        <div class="select-wrapper">
-                            <select id="category" required>
-                                <option value="Comunicado">📢 Aviso Oficial / Comunicado</option>
-                                <option value="Consulta">❓ Consulta / Solicitud</option>
-                            </select>
+                        <label>Tu Rol Institucional</label>
+                        <div class="role-selector-container">
+                            <button type="button" class="role-chip-btn" data-role="Docente">Docente</button>
+                            <button type="button" class="role-chip-btn" data-role="Apoderado">Apoderado</button>
+                            <button type="button" class="role-chip-btn" data-role="Estudiante">Estudiante</button>
                         </div>
+                        <input type="hidden" id="author-role" required>
                     </div>
                 </div>
 
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="course">Nivel / Curso Escolar</label>
+                        <label for="category">Tipo de Mensaje</label>
+                        <div class="select-wrapper">
+                            <select id="category" required>
+                                <option value="Consulta">❓ Consulta / Duda</option>
+                                <option value="Comunicado">📢 Comunicado Oficial</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="course">Nivel / Curso Destino</label>
                         <div class="select-wrapper">
                             <select id="course" required>
                                 <option value="General">🏫 Toda la Institución</option>
@@ -528,121 +503,99 @@
                                 <option value="6° Básico">🎒 6° Básico</option>
                                 <option value="7° Básico">🎒 7° Básico</option>
                                 <option value="8° Básico">🎒 8° Básico</option>
-                                <option value="1° Medio">📐 1° Medio</option>
-                                <option value="2° Medio">📐 2° Medio</option>
-                                <option value="3° Medio">📐 3° Medio</option>
-                                <option value="4° Medio">📐 4° Medio</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Asignatura</label>
-                        <div class="select-wrapper">
-                            <select id="subject" required>
-                                <option value="General">💼 General / Institucional</option>
-                                <option value="Lenguaje y Comunicación">📚 Lenguaje y Comunicación</option>
-                                <option value="Matemática">📐 Matemática</option>
-                                <option value="Ciencias Naturales">🔬 Ciencias Naturales</option>
-                                <option value="Historia, Geografía y Cs. Sociales">🌍 Historia, Geografía y Cs. Sociales</option>
-                                <option value="Inglés">🇬🇧 Inglés</option>
-                                <option value="Artes Visuales">🎨 Artes Visuales</option>
-                                <option value="Música">🎵 Música</option>
-                                <option value="Educación Física y Salud">🏃 Educación Física y Salud</option>
-                                <option value="Tecnología">💻 Tecnología</option>
-                                <option value="Orientación">🌱 Orientación</option>
-                                <option value="Religión">⛪ Religión</option>
-                                <option value="Filosofía">🧠 Filosofía</option>
-                                <option value="Educación Ciudadana">🇨🇱 Educación Ciudadana</option>
-                                <option value="Ciencias para la Ciudadanía">🧬 Cs. para la Ciudadanía</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Selecciona tu Rol (Requerido)</label>
-                    <div class="role-selector-container">
-                        <button type="button" class="role-chip-btn" data-role="Docente">🏫 Docente</button>
-                        <button type="button" class="role-chip-btn" data-role="Apoderado">🏠 Apoderado</button>
-                        <button type="button" class="role-chip-btn" data-role="Funcionario">💼 Funcionario</button>
+                    <label for="subject">Asignatura (Currículum Nacional de Chile)</label>
+                    <div class="select-wrapper">
+                        <select id="subject" required>
+                            <option value="General">General / Orientación Institucional</option>
+                            <option value="Lenguaje y Comunicación">📚 Lenguaje y Comunicación / Lengua y Literatura</option>
+                            <option value="Matemática">🧮 Matemática</option>
+                            <option value="Ciencias Naturales">🧪 Ciencias Naturales</option>
+                            <option value="Historia, Geografía y CCSS">🌍 Historia, Geografía y Ciencias Sociales</option>
+                            <option value="Idioma Extranjero: Inglés">🇬🇧 Idioma Extranjero: Inglés</option>
+                            <option value="Artes Visuales">🎨 Artes Visuales</option>
+                            <option value="Música">🎵 Música</option>
+                            <option value="Educación Física y Salud">🏃 Educación Física y Salud</option>
+                            <option value="Tecnología">💻 Tecnología</option>
+                            <option value="Orientación">🤝 Orientación</option>
+                            <option value="Religión">⛪ Religión (Opcional)</option>
+                        </select>
                     </div>
-                    <input type="hidden" id="author-role" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Asunto Principal</label>
-                    <input type="text" id="title" placeholder="Ej. Materiales para la próxima clase..." required>
+                    <label for="title">Asunto / Título</label>
+                    <input type="text" id="title" placeholder="Ej. Citación a reunión / Duda sobre temario" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Cuerpo del Mensaje</label>
-                    <textarea id="message" rows="4" placeholder="Desarrolla aquí la información con claridad..." required></textarea>
+                    <label for="message">Detalle del Mensaje</label>
+                    <textarea id="message" rows="4" placeholder="Escribe el contenido de tu publicación aquí..." required></textarea>
                 </div>
 
-                <button type="submit" class="btn-submit" id="submit-btn">
-                    <span class="btn-text">Publicar en el Muro</span>
-                    <svg class="spinner hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="31.4 31.4" opacity="0.3"></circle><path d="M12 2C6.47715 2 2 6.47715 2 12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                </button>
+                <button type="submit" class="btn-submit" id="submit-btn">Publicar en el Foro</button>
             </form>
         </section>
 
-        <section class="filters-section fade-in-up" style="animation-delay: 0.1s;">
+        <section class="filters-section">
             <div class="search-box">
                 <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="search-input" placeholder="Buscar por palabra clave, nombre o asunto...">
+                <input type="text" id="search-input" placeholder="Buscar palabras clave en el foro...">
             </div>
+            
             <div class="filter-tabs">
-                <button class="filter-btn active" data-filter="Todos">Línea de Tiempo</button>
-                <button class="filter-btn" data-filter="Comunicado">Avisos Oficiales</button>
+                <button class="filter-btn active" data-filter="Todos">Todo</button>
+                <button class="filter-btn" data-filter="Comunicado">Comunicados</button>
                 <button class="filter-btn" data-filter="Consulta">Consultas</button>
             </div>
             
             <div class="filters-row">
-                <select id="filter-course" class="filter-select">
-                    <option value="Todos">Todos los Cursos</option>
-                    <option value="General">Institucional</option>
-                    <option value="Prekínder">Prekínder</option>
-                    <option value="Kínder">Kínder</option>
-                    <option value="1° Básico">1° Básico</option>
-                    <option value="2° Básico">2° Básico</option>
-                    <option value="3° Básico">3° Básico</option>
-                    <option value="4° Básico">4° Básico</option>
-                    <option value="5° Básico">5° Básico</option>
-                    <option value="6° Básico">6° Básico</option>
-                    <option value="7° Básico">7° Básico</option>
-                    <option value="8° Básico">8° Básico</option>
-                    <option value="1° Medio">1° Medio</option>
-                    <option value="2° Medio">2° Medio</option>
-                    <option value="3° Medio">3° Medio</option>
-                    <option value="4° Medio">4° Medio</option>
-                </select>
-
-                <select id="filter-subject" class="filter-select">
-                    <option value="Todos">Todas las Asignaturas</option>
-                    <option value="General">General / Institucional</option>
-                    <option value="Lenguaje y Comunicación">Lenguaje y Comunicación</option>
-                    <option value="Matemática">Matemática</option>
-                    <option value="Ciencias Naturales">Ciencias Naturales</option>
-                    <option value="Historia, Geografía y Cs. Sociales">Historia, Geografía y Cs. Sociales</option>
-                    <option value="Inglés">Inglés</option>
-                    <option value="Artes Visuales">Artes Visuales</option>
-                    <option value="Música">Música</option>
-                    <option value="Educación Física y Salud">Educación Física y Salud</option>
-                    <option value="Tecnología">Tecnología</option>
-                    <option value="Orientación">Orientación</option>
-                    <option value="Religión">Religión</option>
-                    <option value="Filosofía">Filosofía</option>
-                    <option value="Educación Ciudadana">Educación Ciudadana</option>
-                    <option value="Ciencias para la Ciudadanía">Cs. para la Ciudadanía</option>
-                </select>
+                <div class="select-wrapper">
+                    <select id="filter-course">
+                        <option value="Todos">Filtrar por Curso: Todos</option>
+                        <option value="General">General / Institucional</option>
+                        <option value="Prekínder">Prekínder</option>
+                        <option value="Kínder">Kínder</option>
+                        <option value="1° Básico">1° Básico</option>
+                        <option value="2° Básico">2° Básico</option>
+                        <option value="3° Básico">3° Básico</option>
+                        <option value="4° Básico">4° Básico</option>
+                        <option value="5° Básico">5° Básico</option>
+                        <option value="6° Básico">6° Básico</option>
+                        <option value="7° Básico">7° Básico</option>
+                        <option value="8° Básico">8° Básico</option>
+                    </select>
+                </div>
+                <div class="select-wrapper">
+                    <select id="filter-subject">
+                        <option value="Todos">Filtrar por Asignatura: Todas</option>
+                        <option value="General">General / Orientación Institucional</option>
+                        <option value="Lenguaje y Comunicación">Lenguaje y Comunicación / Literatura</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="Ciencias Naturales">Ciencias Naturales</option>
+                        <option value="Historia, Geografía y CCSS">Historia, Geografía y Ciencias Sociales</option>
+                        <option value="Idioma Extranjero: Inglés">Idioma Extranjero: Inglés</option>
+                        <option value="Artes Visuales">Artes Visuales</option>
+                        <option value="Música">Música</option>
+                        <option value="Educación Física y Salud">Educación Física y Salud</option>
+                        <option value="Tecnología">Tecnología</option>
+                        <option value="Orientación">Orientación</option>
+                        <option value="Religión">Religión</option>
+                    </select>
+                </div>
             </div>
         </section>
 
-        <section class="feed-section" id="posts-container"></section>
+        <section id="posts-container"></section>
     </main>
 
     <script>
-        const STORAGE_KEY = 'conectado_full_platform_v2';
+        const STORAGE_KEY = 'conectaedu_data';
         let posts = [];
         let currentFilter = 'Todos';
         let currentCourseFilter = 'Todos';
@@ -650,16 +603,13 @@
         let searchQuery = '';
         let isAdminMode = false;
 
+        // Referencias del DOM
         const qaForm = document.getElementById('qa-form');
         const postsContainer = document.getElementById('posts-container');
         const searchInput = document.getElementById('search-input');
         const filterButtons = document.querySelectorAll('.filter-btn');
         const filterCourse = document.getElementById('filter-course');
         const filterSubject = document.getElementById('filter-subject');
-        
-        const submitBtn = document.getElementById('submit-btn');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const spinner = submitBtn.querySelector('.spinner');
         
         const roleChips = document.querySelectorAll('.role-chip-btn');
         const hiddenRoleInput = document.getElementById('author-role');
@@ -687,11 +637,7 @@
         }
 
         function saveToStorage() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-            } catch (e) {
-                console.error("Error guardando datos", e);
-            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
         }
 
         function setupEventListeners() {
@@ -729,7 +675,7 @@
                 });
             });
 
-            // Control de Barra Lateral Admin
+            // Lógica Desplegable del Sidebar
             function closeSidebar() {
                 adminSidebar.classList.remove('open');
                 sidebarOverlay.classList.remove('show');
@@ -741,7 +687,7 @@
             sidebarClose.addEventListener('click', closeSidebar);
             sidebarOverlay.addEventListener('click', closeSidebar);
 
-            // Flujo de Autenticación
+            // Validación de credenciales de Administración
             adminLoginBtn.addEventListener('click', () => {
                 if (adminUser.value.trim() === 'admin' && adminPass.value === 'admin') {
                     isAdminMode = true;
@@ -749,9 +695,9 @@
                     adminPass.value = '';
                     adminLoginView.classList.add('hidden');
                     adminDashboardView.classList.remove('hidden');
-                    renderPosts(); // Muestra los botones de eliminar
+                    renderPosts();
                 } else {
-                    alert('Credenciales inválidas. Intente admin / admin');
+                    alert('Credenciales incorrectas institucionales. Pruebe con usuario: admin / clave: admin');
                 }
             });
 
@@ -765,7 +711,7 @@
         }
 
         window.removePost = function(id) {
-            if (confirm('¿Confirma que desea remover permanentemente esta publicación institucional?')) {
+            if (confirm('¿Desea eliminar de forma permanente esta publicación del foro?')) {
                 posts = posts.filter(p => p.id !== id);
                 saveToStorage();
                 renderPosts();
@@ -773,7 +719,7 @@
         };
 
         window.removeReply = function(postId, replyId) {
-            if (confirm('¿Desea eliminar este comentario?')) {
+            if (confirm('¿Desea borrar este comentario de forma permanente?')) {
                 const post = posts.find(p => p.id === postId);
                 if (post) {
                     post.replies = post.replies.filter(r => r.id !== replyId);
@@ -785,41 +731,31 @@
 
         function handleCreatePost(e) {
             e.preventDefault();
-
             if (!hiddenRoleInput.value) {
-                alert('Debe seleccionar su Rol institucional (Docente, Apoderado o Funcionario) para publicar.');
+                alert('Por favor, asigne su Rol Institucional en los botones interactivos (Docente, Apoderado o Estudiante).');
                 return;
             }
 
-            submitBtn.disabled = true;
-            btnText.textContent = 'Procesando...';
-            spinner.classList.remove('hidden');
+            const newPost = {
+                id: 'post_' + Date.now(),
+                author: document.getElementById('author').value.trim(),
+                role: hiddenRoleInput.value,
+                category: document.getElementById('category').value,
+                course: document.getElementById('course').value,
+                subject: document.getElementById('subject').value,
+                title: document.getElementById('title').value.trim(),
+                message: document.getElementById('message').value.trim(),
+                date: new Date().toLocaleString('es-CL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }),
+                replies: []
+            };
 
-            setTimeout(() => {
-                const newPost = {
-                    id: 'post_' + Date.now(),
-                    author: document.getElementById('author').value.trim(),
-                    role: hiddenRoleInput.value,
-                    category: document.getElementById('category').value,
-                    course: document.getElementById('course').value,
-                    subject: document.getElementById('subject').value,
-                    title: document.getElementById('title').value.trim(),
-                    message: document.getElementById('message').value.trim(),
-                    date: new Date().toLocaleString('es-CL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }),
-                    replies: []
-                };
-
-                posts.unshift(newPost);
-                saveToStorage();
-                renderPosts(newPost.id); 
-                
-                qaForm.reset();
-                roleChips.forEach(c => c.classList.remove('active'));
-                hiddenRoleInput.value = '';
-                submitBtn.disabled = false;
-                btnText.textContent = 'Publicar en el Muro';
-                spinner.classList.add('hidden');
-            }, 500); 
+            posts.unshift(newPost);
+            saveToStorage();
+            renderPosts(); 
+            
+            qaForm.reset();
+            roleChips.forEach(c => c.classList.remove('active'));
+            hiddenRoleInput.value = '';
         }
 
         function handleCreateReply(e, postId) {
@@ -830,7 +766,6 @@
                 const newReply = {
                     id: 'reply_' + Date.now(),
                     author: form.querySelector('.reply-author-input').value.trim(),
-                    role: 'Comunidad',
                     message: form.querySelector('.reply-textarea').value.trim(),
                     date: new Date().toLocaleString('es-CL', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
                 };
@@ -840,7 +775,7 @@
             }
         }
 
-        function renderPosts(newPostId = null) {
+        function renderPosts() {
             postsContainer.innerHTML = '';
 
             const filteredPosts = posts.filter(post => {
@@ -856,40 +791,25 @@
             });
 
             if (filteredPosts.length === 0) {
-                postsContainer.innerHTML = `
-                    <div class="empty-state fade-in-up">
-                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" style="margin: 0 auto 12px auto; display:block;">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                        <h3>Muro despejado</h3>
-                        <p>No se encontraron publicaciones con los filtros seleccionados.</p>
-                    </div>
-                `;
+                postsContainer.innerHTML = `<p style="text-align:center; color:#94a3b8; padding: 40px 0; font-size:14px;">No se encontraron mensajes en esta sección.</p>`;
                 return;
             }
 
             filteredPosts.forEach(post => {
-                const isNew = post.id === newPostId;
                 const badgeClass = post.category === 'Comunicado' ? 'comunicado' : 'consulta';
-                
-                const courseLabel = post.course && post.course !== 'General' ? `<span class="badge badge-course">${escapeHTML(post.course)}</span>` : '';
-                const subjectLabel = post.subject && post.subject !== 'General' ? `<span class="badge badge-subject">${escapeHTML(post.subject)}</span>` : '';
-                
-                const adminDeleteBtn = isAdminMode ? `<button class="btn-moderator-delete" onclick="removePost('${post.id}')">Eliminar Entrada del Muro</button>` : '';
+                const courseLabel = post.course !== 'General' ? `<span class="badge badge-course">${escapeHTML(post.course)}</span>` : '';
+                const subjectLabel = post.subject !== 'General' ? `<span class="badge badge-subject">${escapeHTML(post.subject)}</span>` : '';
+                const adminDeleteBtn = isAdminMode ? `<button class="btn-moderator-delete" onclick="removePost('${post.id}')">Eliminar Muro</button>` : '';
 
-                // Construcción de respuestas
                 let repliesHTML = '';
-                if (post.replies && post.replies.length > 0) {
+                if (post.replies.length > 0) {
                     repliesHTML = post.replies.map(reply => `
                         <div class="reply-item">
                             <div class="reply-meta">
-                                <div>
-                                    <span class="reply-user">${escapeHTML(reply.author)}</span>
-                                    <span class="reply-role">• ${escapeHTML(reply.role)}</span>
-                                </div>
+                                <span class="reply-user">${escapeHTML(reply.author)}</span>
                                 <div style="display:flex; align-items:center;">
                                     <span class="reply-date">${reply.date}</span>
-                                    ${isAdminMode ? `<button class="btn-reply-delete" onclick="removeReply('${post.id}', '${reply.id}')">X</button>` : ''}
+                                    ${isAdminMode ? `<button class="btn-reply-delete" onclick="removeReply('${post.id}', '${reply.id}')">Eliminar</button>` : ''}
                                 </div>
                             </div>
                             <p class="reply-body">${escapeHTML(reply.message)}</p>
@@ -898,14 +818,10 @@
                 }
 
                 const card = document.createElement('article');
-                card.className = `post-card ${isNew ? 'new-post-anim' : ''}`;
+                card.className = `post-card`;
 
                 card.innerHTML = `
                     <div class="post-header">
-                        <div>
-                            <div class="post-author">${escapeHTML(post.author)} <span class="post-role" style="font-size:11px; margin-left:4px;">[${escapeHTML(post.role || 'Usuario')}]</span></div>
-                            <span class="post-date">${post.date}</span>
-                        </div>
                         <div class="badge-wrapper">
                             <span class="badge ${badgeClass}">${post.category}</span>
                             ${courseLabel}
@@ -915,18 +831,23 @@
                     <h3 class="post-title">${escapeHTML(post.title)}</h3>
                     <p class="post-body">${escapeHTML(post.message)}</p>
                     
-                    ${adminDeleteBtn}
+                    <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                        <div>
+                            <span class="post-date-bottom">Escrito por <strong>${escapeHTML(post.author)}</strong> (${escapeHTML(post.role)}) el ${post.date}</span>
+                        </div>
+                        ${adminDeleteBtn}
+                    </div>
 
                     <div class="replies-container">
-                        ${post.replies.length > 0 ? `<div class="replies-title">Respuestas (${post.replies.length})</div>` : ''}
+                        ${post.replies.length > 0 ? `<div class="replies-title">Respuestas en este hilo (${post.replies.length})</div>` : ''}
                         <div class="replies-list">${repliesHTML}</div>
                         
                         <form class="reply-form" data-postid="${post.id}">
                             <div class="reply-mini-grid">
                                 <input type="text" placeholder="Tu Nombre" class="input-reply reply-author-input" required>
-                                <input type="text" placeholder="Escribe una respuesta pública..." class="input-reply reply-textarea" required>
+                                <input type="text" placeholder="Escribe tu respuesta pública..." class="input-reply reply-textarea" required>
                             </div>
-                            <button type="submit" class="btn-reply">Comentar</button>
+                            <button type="submit" class="btn-reply">Responder</button>
                         </form>
                     </div>
                 `;
@@ -938,6 +859,7 @@
             });
         }
 
+        // Función de escape para prevenir fallos o scripts inyectados en texto plano
         function escapeHTML(str) {
             return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
         }
