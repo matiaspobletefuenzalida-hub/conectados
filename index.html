@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>conectado.cl - Red Institucional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-left">
+                <div class="brand">
+                    <div class="logo-wrapper">
+                        <svg class="logo-svg" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="netGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#4f46e5" />
+                                    <stop offset="100%" stop-color="#06b6d4" />
+                                </linearGradient>
+                                <linearGradient id="netGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#6366f1" />
+                                    <stop offset="100%" stop-color="#ec4899" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="16" cy="16" r="6" fill="url(#netGrad1)" />
+                            <circle cx="34" cy="20" r="8" fill="url(#netGrad2)" />
+                            <circle cx="22" cy="36" r="5" fill="url(#netGrad1)" />
+                            <path d="M16 16 L34 20 M34 20 L22 36 M22 36 L16 16" stroke="#4f46e5" stroke-width="2.5" stroke-linecap="round" opacity="0.4" fill="none"/>
+                            <circle cx="25" cy="22" r="3" fill="#06b6d4" />
+                        </svg>
+                    </div>
+                    <h1>conectado<span>.cl</span></h1>
+                </div>
+                <p class="subtitle">Plataforma de Comunicación Escolar Integrada</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="form-section transition-card">
+            <div class="section-header">
+                <h2 class="section-title">Crear Nueva Publicación</h2>
+            </div>
+            <form id="qa-form">
+                <div class="form-grid split">
+                    <div class="form-group">
+                        <label for="author-name">Nombre Completo</label>
+                        <input type="text" id="author-name" placeholder="Ej. Juan Pablo Correa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Clasificación de Mensaje</label>
+                        <div class="select-wrapper">
+                            <select id="category" required>
+                                <option value="Comunicado">📢 Aviso Oficial / Circular</option>
+                                <option value="Consulta">❓ Consulta / Solicitud</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="label-block">Selecciona tu Rol Estudiantil / Institucional</label>
+                    <div class="role-selector-container" id="role-selector-group">
+                        <button type="button" class="role-chip-btn" data-role="Docente">
+                            <span class="chip-icon">🏫</span> Docente
+                        </button>
+                        <button type="button" class="role-chip-btn" data-role="Apoderado">
+                            <span class="chip-icon">🏠</span> Apoderado
+                        </button>
+                        <button type="button" class="role-chip-btn" data-role="Funcionario">
+                            <span class="chip-icon">💼</span> Funcionario
+                        </button>
+                    </div>
+                    <input type="hidden" id="author-role" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Título o Asunto</label>
+                    <input type="text" id="title" placeholder="Ej. Citación a reunión de microcentro extraordinario..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Detalle del Mensaje</label>
+                    <textarea id="message" rows="4" placeholder="Redacta la información clara y precisa para la comunidad..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submit-btn">
+                    <span class="btn-text">Publicar en la Línea de Tiempo</span>
+                    <svg class="spinner hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.2"></circle><path d="M12 2C6.47715 2 2 6.47715 2 12" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg>
+                </button>
+            </form>
+        </section>
+
+        <section class="filters-section transition-card">
+            <div class="search-box">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="search-input" placeholder="Buscar por palabra clave, nombres o etiquetas de rol...">
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="Todos">Todos los registros</button>
+                <button class="filter-btn" data-filter="Comunicado">Circulares Oficiales</button>
+                <button class="filter-btn" data-filter="Consulta">Consultas Abiertas</button>
+            </div>
+        </section>
+
+        <section class="feed-section">
+            <div id="posts-container"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
