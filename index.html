@@ -29,7 +29,7 @@
             --accent-hover: #4338ca;
             --accent-glow: rgba(79, 70, 229, 0.15);
             --success: #10b981;          
-            --danger: #ef4444;           /* Rojo para borrar */
+            --danger: #ef4444;           
             
             --color-comunicado: #0284c7;  
             --bg-comunicado: rgba(2, 132, 199, 0.08);
@@ -75,7 +75,7 @@
             max-width: 1000px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between; /* Permite el botón admin a la derecha */
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -91,7 +91,6 @@
             gap: 16px;
         }
 
-        /* CORRECCIÓN DEL LOGO: Medidas estrictas para evitar desbordes */
         .logo-wrapper {
             width: 44px;
             height: 44px;
@@ -203,7 +202,7 @@
         .post-title { font-size: 19px; font-weight: 800; margin-bottom: 12px; color: var(--text-title); line-height: 1.4; }
         .post-body { font-size: 15px; color: var(--text-body); white-space: pre-line; }
 
-        /* HILOS DE RESPUESTAS (MANTENIDOS INTACTOS) */
+        /* HILOS DE RESPUESTAS */
         .replies-container { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-premium); }
         .replies-title { font-size: 13px; font-weight: 800; color: var(--text-title); margin-bottom: 14px; text-transform: uppercase; }
         .reply-item { background-color: rgba(226, 231, 240, 0.4); border-left: 4px solid var(--accent); padding: 14px 18px; border-radius: 4px var(--radius-md) var(--radius-md) 4px; margin-bottom: 12px; position: relative;}
@@ -288,13 +287,20 @@
                         <label for="subject">Asignatura</label>
                         <div class="select-wrapper">
                             <select id="subject" required>
-                                <option value="Institucional">💼 Institucional</option>
-                                <option value="Lenguaje">📚 Lenguaje</option>
+                                <option value="Institucional">💼 Institucional / General</option>
+                                <option value="Lenguaje">📚 Lengua y Literatura</option>
                                 <option value="Matemáticas">📐 Matemáticas</option>
-                                <option value="Ciencias">🔬 Ciencias</option>
-                                <option value="Historia">🌍 Historia</option>
-                                <option value="Inglés">🇬🇧 Inglés</option>
-                                <option value="Artes / Ed. Física">🎨 Artes / Ed. Física</option>
+                                <option value="Ciencias Naturales">🔬 Ciencias Naturales</option>
+                                <option value="Historia">🌍 Historia, Geografía y Cs. Sociales</option>
+                                <option value="Inglés">🇬🇧 Idioma Extranjero: Inglés</option>
+                                <option value="Artes Visuales">🎨 Artes Visuales</option>
+                                <option value="Música">🎵 Música</option>
+                                <option value="Educación Física">🏃 Educación Física y Salud</option>
+                                <option value="Tecnología">💻 Tecnología</option>
+                                <option value="Orientación">🌱 Orientación</option>
+                                <option value="Religión">⛪ Religión</option>
+                                <option value="Filosofía">🧠 Filosofía (3° y 4° Medio)</option>
+                                <option value="Educación Ciudadana">🇨🇱 Ed. Ciudadana (3° y 4° Medio)</option>
                             </select>
                         </div>
                     </div>
@@ -342,12 +348,19 @@
                 <select id="filter-subject">
                     <option value="Todos">Todas las Asignaturas</option>
                     <option value="Institucional">Institucional</option>
-                    <option value="Lenguaje">Lenguaje</option>
+                    <option value="Lenguaje">Lengua y Literatura</option>
                     <option value="Matemáticas">Matemáticas</option>
-                    <option value="Ciencias">Ciencias</option>
-                    <option value="Historia">Historia</option>
+                    <option value="Ciencias Naturales">Ciencias Naturales</option>
+                    <option value="Historia">Historia, Geografía y Cs. Sociales</option>
                     <option value="Inglés">Inglés</option>
-                    <option value="Artes / Ed. Física">Artes / Ed. Física</option>
+                    <option value="Artes Visuales">Artes Visuales</option>
+                    <option value="Música">Música</option>
+                    <option value="Educación Física">Educación Física y Salud</option>
+                    <option value="Tecnología">Tecnología</option>
+                    <option value="Orientación">Orientación</option>
+                    <option value="Religión">Religión</option>
+                    <option value="Filosofía">Filosofía</option>
+                    <option value="Educación Ciudadana">Educación Ciudadana</option>
                 </select>
             </div>
         </section>
@@ -358,7 +371,6 @@
     </main>
 
     <script>
-        // Nueva Key para evitar conflictos y guardar todo
         const STORAGE_KEY = 'conectado_db_v_classic_final';
         let posts = [];
         let searchQuery = '';
@@ -377,6 +389,15 @@
         const roleChips = document.querySelectorAll('.role-chip-btn');
         const hiddenRoleInput = document.getElementById('author-role');
         const adminBtn = document.getElementById('admin-btn');
+
+        // Mapeo amigable de visualización para las tarjetas de la línea de tiempo
+        const subjectLabels = {
+            'Institucional': '💼 Institucional', 'Lenguaje': '📚 Lenguaje', 'Matemáticas': '📐 Matemáticas',
+            'Ciencias Naturales': '🔬 Ciencias Naturales', 'Historia': '🌍 Historia y Cs. Sociales', 'Inglés': '🇬🇧 Inglés',
+            'Artes Visuales': '🎨 Artes Visuales', 'Música': '🎵 Música', 'Educación Física': '🏃 Ed. Física y Salud',
+            'Tecnología': '💻 Tecnología', 'Orientación': '🌱 Orientación', 'Religión': '⛪ Religión',
+            'Filosofía': '🧠 Filosofía', 'Educación Ciudadana': '🇨🇱 Ed. Ciudadana'
+        };
 
         function init() {
             try {
@@ -442,7 +463,6 @@
             }
         }
 
-        // Lógica de borrar (accesible de forma global para los botones)
         window.deletePost = function(id) {
             if(confirm("¿Eliminar publicación permanentemente?")) {
                 posts = posts.filter(p => p.id !== id);
@@ -565,6 +585,8 @@
                     `).join('');
                 }
 
+                const displaySubject = subjectLabels[post.subject] || '💼 Institucional';
+
                 card.innerHTML = `
                     <div class="post-header">
                         <div class="meta-user">
@@ -574,7 +596,7 @@
                         </div>
                         <div class="badges-container">
                             <span class="badge ${badgeClass}">${post.category}</span>
-                            <span class="badge subject">${post.subject || 'General'}</span>
+                            <span class="badge subject">${displaySubject}</span>
                             ${isAdmin ? `<button class="btn-delete" onclick="deletePost('${post.id}')">Eliminar</button>` : ''}
                         </div>
                     </div>
