@@ -520,7 +520,7 @@
             
             document.getElementById('btn-new-post').addEventListener('click', () => {
                 if(!currentUser) {
-                    Swal.fire('Acceso Privado', 'Debes iniciar sesión con tu cuenta institucional para publicar.', 'warning');
+                    Swal.fire('Acceso Privado', 'Debes iniciar sesión con tu cuenta para publicar.', 'warning');
                     return;
                 }
                 modal.classList.add('show');
@@ -594,18 +594,30 @@
             });
 
             onAuthStateChanged(auth, (user) => {
-                if (user && user.email.endsWith("@slepcolchagua.cl")) {
+                if (user && (user.email.endsWith("@slepcolchagua.cl") || user.email.endsWith("@gmail.com"))) {
                     currentUser = user;
                     document.getElementById('unauth-view').style.display = 'none';
                     document.getElementById('auth-view').style.display = 'block';
                     document.getElementById('user-display-name').textContent = user.displayName;
                     document.getElementById('user-initial').textContent = user.displayName.charAt(0).toUpperCase();
                     document.getElementById('author').value = user.displayName;
-                    document.getElementById('user-role-selector').value = selectedRole;
+                    
+                    const roleSelector = document.getElementById('user-role-selector');
+                    
+                    // Lógica para asignar rol automáticamente
+                    if (user.email.endsWith("@gmail.com")) {
+                        selectedRole = "Apoderado";
+                        roleSelector.value = "Apoderado";
+                        roleSelector.disabled = true; // Bloquea el selector para los apoderados
+                    } else {
+                        roleSelector.value = selectedRole;
+                        roleSelector.disabled = false; // Lo mantiene habilitado para institucionales
+                    }
+                    
                     applyRoleDashboardRules();
                 } else if (user) {
                     signOut(auth);
-                    Swal.fire('Acceso Restringido', 'Sólo cuentas con el dominio institucional @slepcolchagua.cl están autorizadas.', 'error');
+                    Swal.fire('Acceso Restringido', 'Sólo cuentas institucionales o cuentas @gmail.com (Apoderados) están autorizadas.', 'error');
                 } else {
                     currentUser = null;
                     document.getElementById('unauth-view').style.display = 'block';
