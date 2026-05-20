@@ -159,7 +159,7 @@
         .post-meta-text .author-name { font-size: 14px; font-weight: 700; color: var(--primary-dark); display: block; }
         .post-meta-text .post-date { font-size: 12px; color: var(--text-light); }
         
-        /* MODAL */
+        /* MODAL GENERAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; }
         .modal-overlay.show { opacity: 1; visibility: visible; }
         .modal-box { background: var(--bg-surface); width: 90%; max-width: 650px; border-radius: var(--radius-xl); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); transform: scale(0.95); transition: 0.3s; overflow: hidden; display: flex; flex-direction: column; max-height: 90vh;}
@@ -172,7 +172,7 @@
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
         .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
         .form-group label { font-size: 13px; font-weight: 600; color: var(--text-main); }
-        input[type="text"], select, textarea { font-family: 'Poppins'; font-size: 14px; padding: 14px; border: 1px solid var(--border-soft); border-radius: var(--radius-md); background: var(--bg-input); outline: none; transition: 0.3s; width: 100%; }
+        input[type="text"], input[type="time"], select, textarea { font-family: 'Poppins'; font-size: 14px; padding: 14px; border: 1px solid var(--border-soft); border-radius: var(--radius-md); background: var(--bg-input); outline: none; transition: 0.3s; width: 100%; }
         input:focus, select:focus, textarea:focus { border-color: var(--primary-brand); background: white; box-shadow: 0 0 0 4px var(--border-focus); }
 
         /* RESPUESTAS INTERNAS */
@@ -182,14 +182,36 @@
         .replies-list { margin-top: 16px; }
         .reply-item { background: var(--bg-input); padding: 14px; border-radius: var(--radius-md); margin-bottom: 12px; border-left: 3px solid var(--border-soft); }
 
-        /* WIDGET CALENDARIO DINÁMICO */
-        .widget-panel { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm);}
+        /* WIDGET CALENDARIO */
+        .widget-panel { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
         .widget-title { font-size: 16px; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 8px;}
-        .mini-cal-header { display: flex; justify-content: center; align-items: center; margin-bottom: 16px; font-size: 14px; font-weight: 700; color: var(--primary-brand); text-transform: capitalize; }
+        .mini-cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 14px; font-weight: 700; color: var(--primary-brand); }
+        .mini-cal-nav { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; padding: 4px; border-radius: 50%; transition: 0.2s; }
+        .mini-cal-nav:hover { background: var(--bg-input); color: var(--primary-brand); }
+        
         .mini-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
         .mini-day-name { font-size: 11px; font-weight: 700; color: var(--text-light); margin-bottom: 8px; }
-        .mini-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; border-radius: 50%; color: var(--text-main); }
-        .mini-day.active { background: var(--primary-brand); color: white; box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3); }
+        
+        .mini-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; border-radius: 50%; color: var(--text-main); cursor: pointer; transition: 0.2s; position: relative; }
+        .mini-day:hover { background: var(--border-soft); }
+        .mini-day.active { background: var(--primary-brand); color: white !important; box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3); }
+        .mini-day.holiday { color: var(--danger); font-weight: 700; background: #fee2e2; }
+        .mini-day.holiday:hover { background: #fca5a5; }
+        .mini-day.has-events::after { content: ''; position: absolute; bottom: 4px; width: 5px; height: 5px; background: var(--warning); border-radius: 50%; }
+        .mini-day.active::after { background: white; }
+
+        /* VENTANA EMERGENTE DIVIDIDA */
+        .split-modal-container { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 600px) { .split-modal-container { grid-template-columns: 1fr; } }
+        .split-column { display: flex; flex-direction: column; }
+        .split-column h4 { font-size: 14px; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border-soft); padding-bottom: 8px; }
+        
+        .events-agenda-list { display: flex; flex-direction: column; gap: 12px; max-height: 300px; overflow-y: auto; padding-right: 4px; }
+        .agenda-item { background: var(--bg-input); padding: 12px; border-radius: var(--radius-md); border-left: 4px solid var(--primary-brand); }
+        .agenda-item.holiday-type { border-left-color: var(--danger); background: #fff5f5; }
+        .agenda-title { font-size: 13px; font-weight: 700; color: var(--primary-dark); }
+        .agenda-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        .agenda-time { font-size: 11px; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px; }
 
         .recent-activity-list { margin-top: 20px; border-top: 1px solid var(--border-soft); padding-top: 16px; }
         .activity-item { font-size: 13px; padding: 8px 0; border-bottom: 1px dashed var(--border-soft); color: var(--text-main); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
@@ -273,7 +295,6 @@
             </div>
 
             <div class="dashboard-grid">
-                
                 <div class="feed-section">
                     <div class="feed-header">
                         <h2>Publicaciones Recientes</h2>
@@ -283,7 +304,6 @@
                             <button class="filter-btn" data-filter="Consulta">Consultas</button>
                         </div>
                     </div>
-                    
                     <div id="posts-container"></div>
                 </div>
 
@@ -292,11 +312,12 @@
                         <div class="widget-title"><i class='bx bx-calendar-event' style="color:var(--primary-brand);"></i> Calendario Escolar</div>
                         
                         <div class="mini-cal-header">
+                            <button class="mini-cal-nav" id="cal-prev-month"><i class='bx bx-chevron-left'></i></button>
                             <span id="mini-cal-month">-</span>
+                            <button class="mini-cal-nav" id="cal-next-month"><i class='bx bx-chevron-right'></i></button>
                         </div>
                         
-                        <div class="mini-cal-grid" id="calendar-days-grid">
-                            </div>
+                        <div class="mini-cal-grid" id="calendar-days-grid"></div>
 
                         <div class="recent-activity-list" id="activity-container">
                             <h4 style="font-size:11px; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px; letter-spacing:0.5px;">Últimas actualizaciones</h4>
@@ -304,7 +325,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
@@ -317,21 +337,28 @@
             </div>
             <div class="modal-body">
                 <form id="qa-form">
-                    <div class="form-grid" style="display:none;">
-                        <input type="text" id="author" required>
-                    </div>
-
+                    <div class="form-grid" style="display:none;"><input type="text" id="author" required></div>
                     <div class="form-grid">
+                        <div class="form-group"><label>Categoría</label><select id="category" required></select></div>
                         <div class="form-group">
-                            <label>Categoría</label>
-                            <select id="category" required>
-                                </select>
+                            <label>Curso Destino</label>
+                            <select id="course" required>
+                                <option value="General">🏫 Toda la Institución</option>
+                                <option value="Pre-Kinder">🎒 Pre-Kinder</option>
+                                <option value="Kinder">🎒 Kinder</option>
+                                <option value="1° Básico">🎒 1° Básico</option>
+                                <option value="2° Básico">🎒 2° Básico</option>
+                                <option value="3° Básico">🎒 3° Básico</option>
+                                <option value="4° Básico">🎒 4° Básico</option>
+                                <option value="5° Básico">🎒 5° Básico</option>
+                                <option value="6° Básico">🎒 6° Básico</option>
+                                <option value="7° Básico">🎒 7° Básico</option>
+                                <option value="8° Básico">🎒 8° Básico</option>
+                            </select>
                         </div>
-                        <div class="form-group"><label>Curso Destino</label><select id="course" required><option value="General">🏫 Toda la Institución</option><option value="1° Básico">🎒 1° Básico</option><option value="2° Básico">🎒 2° Básico</option></select></div>
                     </div>
-                    
                     <div class="form-group">
-                        <label>Asignatura Relacionada</label>
+                        <label>Asignatura / Taller Relacionado</label>
                         <select id="subject" required>
                             <option value="General">General / Orientación</option>
                             <option value="Lenguaje y Comunicación">Lenguaje y Comunicación</option>
@@ -339,16 +366,18 @@
                             <option value="Ciencias Naturales">Ciencias Naturales</option>
                             <option value="Historia, Geografía y Cs">Historia, Geografía y Cs Sociales</option>
                             <option value="Inglés">Inglés</option>
+                            <option value="Artes Visuales">Artes Visuales</option>
+                            <option value="Música">Música</option>
+                            <option value="Educación Física y Salud">Educación Física y Salud</option>
+                            <option value="Tecnología">Tecnología</option>
+                            <option value="Taller de Huerto">🌱 Taller de Huerto</option>
+                            <option value="Taller de Instrumentos">🎵 Taller de Instrumentos</option>
+                            <option value="Taller de Inglés">🇬🇧 Taller de Inglés</option>
+                            <option value="Taller de Matemáticas">📐 Taller de Matemáticas</option>
                         </select>
                     </div>
-
                     <div class="form-group"><label>Asunto / Encabezado</label><input type="text" id="title" placeholder="¿De qué trata tu publicación?" required></div>
-                    
-                    <div class="form-group">
-                        <label>Mensaje Institucional</label>
-                        <textarea id="message" rows="5" placeholder="Escribe los detalles aquí..." maxlength="400" required></textarea>
-                    </div>
-                    
+                    <div class="form-group"><label>Mensaje Institucional</label><textarea id="message" rows="5" placeholder="Escribe los detalles aquí..." maxlength="400" required></textarea></div>
                     <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:24px; border-top:1px solid #e2e8f0; padding-top:20px;">
                         <button type="button" class="filter-btn" id="cancel-modal-btn">Cancelar</button>
                         <button type="submit" class="btn-primary"><i class='bx bx-send'></i> Publicar</button>
@@ -358,12 +387,84 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="calendar-modal-overlay">
+        <div class="modal-box" style="max-width: 750px;">
+            <div class="modal-header">
+                <h3><i class='bx bx-calendar-star'></i> Planificación: <span id="cal-modal-date-title"></span></h3>
+                <button class="btn-close-modal" id="close-cal-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="split-modal-container">
+                    
+                    <div class="split-column">
+                        <h4><i class='bx bx-list-ul'></i> Actividades del Día</h4>
+                        <div class="events-agenda-list" id="modal-events-list"></div>
+                    </div>
+
+                    <div class="split-column" id="modal-add-event-section">
+                        <h4><i class='bx bx-plus-circle'></i> Añadir Evento</h4>
+                        <div id="cal-unauth-msg" style="display:none; color:var(--text-muted); font-size:13px; text-align:center; padding:20px 0;">
+                            <i class='bx bx-lock-alt' style="font-size:24px; color:var(--text-light);"></i>
+                            <p>Exclusivo para Profesores (Docentes) autenticados.</p>
+                        </div>
+                        <form id="cal-event-form">
+                            <div class="form-group">
+                                <label>Curso Destinatario</label>
+                                <select id="event-course" required>
+                                    <option value="General">🏫 Toda la Institución</option>
+                                    <option value="Pre-Kinder">🎒 Pre-Kinder</option>
+                                    <option value="Kinder">🎒 Kinder</option>
+                                    <option value="1° Básico">🎒 1° Básico</option>
+                                    <option value="2° Básico">🎒 2° Básico</option>
+                                    <option value="3° Básico">🎒 3° Básico</option>
+                                    <option value="4° Básico">🎒 4° Básico</option>
+                                    <option value="5° Básico">🎒 5° Básico</option>
+                                    <option value="6° Básico">🎒 6° Básico</option>
+                                    <option value="7° Básico">🎒 7° Básico</option>
+                                    <option value="8° Básico">🎒 8° Básico</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Asignatura / Taller</label>
+                                <select id="event-subject" required>
+                                    <option value="General">General / Reunión</option>
+                                    <option value="Lenguaje y Comunicación">Lenguaje y Comunicación</option>
+                                    <option value="Matemática">Matemática</option>
+                                    <option value="Ciencias Naturales">Ciencias Naturales</option>
+                                    <option value="Historia, Geografía y Cs">Historia, Geografía y Cs Sociales</option>
+                                    <option value="Inglés">Inglés</option>
+                                    <option value="Taller de Huerto">🌱 Taller de Huerto</option>
+                                    <option value="Taller de Instrumentos">🎵 Taller de Instrumentos</option>
+                                    <option value="Taller de Inglés">🇬🇧 Taller de Inglés</option>
+                                    <option value="Taller de Matemáticas">📐 Taller de Matemáticas</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Título de la Actividad</label>
+                                <input type="text" id="event-title" placeholder="Ej: Evaluación, Salida pedagógica..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Hora de Inicio</label>
+                                <input type="time" id="event-time" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Indicaciones / Descripción</label>
+                                <textarea id="event-desc" rows="2" placeholder="Breve descripción..." maxlength="120" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary" style="width:100%; justify-content:center;"><i class='bx bx-save'></i> Guardar en Calendario</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
-        // Mantiene tus credenciales idénticas para conexión directa instantánea
         const firebaseConfig = {
             apiKey: "AIzaSyCOfNPxNcrxGBTQSjUXppN9GJnEQfcrDm4",
             authDomain: "foro-conectaedu.firebaseapp.com",
@@ -374,31 +475,44 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
+        
         const forumDocRef = doc(db, "forum_data", "posts_collection");
+        const calendarDocRef = doc(db, "forum_data", "calendar_collection");
 
         let posts = [];
+        let calendarEvents = {}; 
         let currentFilter = 'Todos';
         let searchQuery = '';
         let currentUser = null; 
         let selectedRole = localStorage.getItem('conectaedu_current_role') || 'Docente';
+        
+        let currentCalendarDate = new Date();
+        let selectedDayString = ''; 
+
+        // Feriados oficiales en Chile para el año 2026
+        const feriadosChile2026 = {
+            "2026-01-01": "Año Nuevo",
+            "2026-04-03": "Viernes Santo",
+            "2026-04-04": "Sábado Santo",
+            "2026-05-01": "Día del Trabajo",
+            "2026-05-21": "Día de las Glorias Navales",
+            "2026-06-29": "San Pedro y San Pablo",
+            "2026-07-16": "Día de la Virgen del Carmen",
+            "2026-08-15": "Asunción de la Virgen",
+            "2026-09-18": "Independencia Nacional",
+            "2026-09-19": "Días de las Glorias del Ejército",
+            "2026-10-12": "Encuentro de Dos Mundos",
+            "2026-10-31": "Día de las Iglesias Evangélicas",
+            "2026-11-01": "Día de Todos los Santos",
+            "2026-12-08": "Inmaculada Concepción",
+            "2026-12-25": "Navidad"
+        };
 
         document.addEventListener('DOMContentLoaded', () => {
             initFirebase();
             setupUIHandlers();
+            setupCalendarHandlers();
             renderCalendar();
-            
-            if(!localStorage.getItem('conectaedu_pro_onboarded')) {
-                setTimeout(() => {
-                    Swal.fire({
-                        title: 'ConectaEdu Panel Pro',
-                        text: 'Muro optimizado con arquitectura de roles, sistema integrado de métricas y notificaciones prioritarias.',
-                        icon: 'success',
-                        confirmButtonText: 'Entendido',
-                        confirmButtonColor: '#4f46e5'
-                    });
-                    localStorage.setItem('conectaedu_pro_onboarded', 'true');
-                }, 800);
-            }
         });
 
         function setupUIHandlers() {
@@ -445,18 +559,38 @@
                 selectedRole = e.target.value;
                 localStorage.setItem('conectaedu_current_role', selectedRole);
                 applyRoleDashboardRules();
+                renderCalendar(); 
             });
+        }
+
+        function setupCalendarHandlers() {
+            document.getElementById('cal-prev-month').addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+                renderCalendar();
+            });
+
+            document.getElementById('cal-next-month').addEventListener('click', () => {
+                currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+                renderCalendar();
+            });
+
+            document.getElementById('close-cal-modal-btn').addEventListener('click', () => {
+                document.getElementById('calendar-modal-overlay').classList.remove('show');
+            });
+
+            document.getElementById('cal-event-form').addEventListener('submit', handleCreateCalendarEvent);
         }
 
         function initFirebase() {
             onSnapshot(forumDocRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    posts = docSnap.data().posts || [];
-                } else {
-                    posts = [];
-                }
+                posts = docSnap.exists() ? (docSnap.data().posts || []) : [];
                 updateDashboardData();
                 renderPosts();
+            });
+
+            onSnapshot(calendarDocRef, (docSnap) => {
+                calendarEvents = docSnap.exists() ? (docSnap.data().events || {}) : {};
+                renderCalendar();
             });
 
             onAuthStateChanged(auth, (user) => {
@@ -482,7 +616,6 @@
             });
         }
 
-        // CONTROL DE REGLAS DE NEGOCIO POR ROL DE CLIENTE
         function applyRoleDashboardRules() {
             const categorySelect = document.getElementById('category');
             if(!categorySelect) return;
@@ -494,21 +627,17 @@
                     <option value="Comunicado">📢 Comunicado Oficial</option>
                 `;
             } else {
-                // Estudiantes y Apoderados no pueden saltarse la jerarquía con circulares oficiales
                 categorySelect.innerHTML = `<option value="Consulta">❓ Consulta Pública</option>`;
             }
         }
 
-        // PROCESA MÉTRICAS, ALERTAS Y WIDGETS DESDE TUS DATOS EN FIRESTORE
         function updateDashboardData() {
-            // 1. KPIs
             document.getElementById('kpi-total').textContent = posts.length;
             document.getElementById('kpi-comunicados').textContent = posts.filter(p => p.category === 'Comunicado').length;
             
             const totalReplies = posts.reduce((sum, p) => sum + (p.replies ? p.replies.length : 0), 0);
             document.getElementById('kpi-replies').textContent = totalReplies;
 
-            // 2. Sistema de Notificaciones Críticas (Busca el comunicado más reciente)
             const lastComunicado = posts.find(p => p.category === 'Comunicado');
             const banner = document.getElementById('urgent-banner');
             if (lastComunicado) {
@@ -521,7 +650,6 @@
                 banner.style.display = 'none';
             }
 
-            // 3. Widget de últimas actualizaciones
             const activityContainer = document.getElementById('activity-container');
             activityContainer.innerHTML = '<h4 style="font-size:11px; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px; letter-spacing:0.5px;">Últimas actualizaciones</h4>';
             const recent = posts.slice(0, 3);
@@ -536,7 +664,6 @@
 
         function handleCreatePost(e) {
             e.preventDefault();
-            
             const newPost = { 
                 id: 'post_' + Date.now(), 
                 author: document.getElementById('author').value.trim(), 
@@ -559,6 +686,138 @@
                     applyRoleDashboardRules();
                 }
                 Swal.fire({ toast: true, position: 'bottom-end', icon: 'success', title: 'Mensaje publicado', showConfirmButton: false, timer: 2000 });
+            });
+        }
+
+        function renderCalendar() {
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth();
+            
+            const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+            document.getElementById('mini-cal-month').textContent = `${monthNames[month]} ${year}`;
+            
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            const grid = document.getElementById('calendar-days-grid');
+            grid.innerHTML = `
+                <div class="mini-day-name">L</div><div class="mini-day-name">M</div><div class="mini-day-name">M</div>
+                <div class="mini-day-name">J</div><div class="mini-day-name">V</div><div class="mini-day-name">S</div>
+                <div class="mini-day-name">D</div>
+            `;
+            
+            let offset = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+            for(let i = 0; i < offset; i++) {
+                grid.innerHTML += `<div></div>`;
+            }
+            
+            const today = new Date();
+            for(let d = 1; d <= daysInMonth; d++) {
+                const dayStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                
+                let classes = [];
+                if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    classes.push('active');
+                }
+                if (feriadosChile2026[dayStr]) {
+                    classes.push('holiday');
+                }
+                if (calendarEvents[dayStr] && calendarEvents[dayStr].length > 0) {
+                    classes.push('has-events');
+                }
+
+                grid.innerHTML += `<div class="mini-day ${classes.join(' ')}" onclick="openCalendarDayModal('${dayStr}', ${d})">${d}</div>`;
+            }
+        }
+
+        window.openCalendarDayModal = function(dayStr, dayNum) {
+            selectedDayString = dayStr;
+            const monthName = document.getElementById('mini-cal-month').textContent;
+            document.getElementById('cal-modal-date-title').textContent = `${dayNum} de ${monthName}`;
+            
+            const formSection = document.getElementById('cal-event-form');
+            const unauthMsg = document.getElementById('cal-unauth-msg');
+            
+            if (currentUser && selectedRole === 'Docente') {
+                formSection.style.display = 'block';
+                unauthMsg.style.display = 'none';
+            } else {
+                formSection.style.display = 'none';
+                unauthMsg.style.display = 'block';
+            }
+
+            renderModalEvents(dayStr);
+            document.getElementById('calendar-modal-overlay').classList.add('show');
+        };
+
+        function renderModalEvents(dayStr) {
+            const listContainer = document.getElementById('modal-events-list');
+            listContainer.innerHTML = '';
+
+            let hasContent = false;
+
+            if (feriadosChile2026[dayStr]) {
+                hasContent = true;
+                listContainer.innerHTML += `
+                    <div class="agenda-item holiday-type">
+                        <div class="agenda-title">🇨🇱 Feriado Legal: ${feriadosChile2026[dayStr]}</div>
+                        <div class="agenda-desc">Festivo oficial regulado en el territorio nacional chileno.</div>
+                        <div class="agenda-time"><i class='bx bx-time'></i> Todo el día</div>
+                    </div>
+                `;
+            }
+
+            if (calendarEvents[dayStr] && calendarEvents[dayStr].length > 0) {
+                hasContent = true;
+                calendarEvents[dayStr].forEach(ev => {
+                    listContainer.innerHTML += `
+                        <div class="agenda-item">
+                            <div class="agenda-title">${escapeHTML(ev.title)}</div>
+                            <div class="agenda-desc"><strong>Curso:</strong> ${escapeHTML(ev.course || 'General')} | <strong>Asig:</strong> ${escapeHTML(ev.subject || 'General')}<br>${escapeHTML(ev.desc)}</div>
+                            <div class="agenda-time"><i class='bx bx-time'></i> ${ev.time} hrs • Por: ${escapeHTML(ev.author)}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            if (!hasContent) {
+                listContainer.innerHTML = `
+                    <div style="text-align:center; padding:30px 0; color:var(--text-light); font-size:13px;">
+                        <i class='bx bx-calendar-blank' style="font-size:28px;"></i>
+                        <p>No hay actividades programadas para este día.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function handleCreateCalendarEvent(e) {
+            e.preventDefault();
+            if (!currentUser || selectedRole !== 'Docente') return;
+
+            const course = document.getElementById('event-course').value;
+            const subject = document.getElementById('event-subject').value;
+            const title = document.getElementById('event-title').value.trim();
+            const time = document.getElementById('event-time').value;
+            const desc = document.getElementById('event-desc').value.trim();
+
+            if(!calendarEvents[selectedDayString]) {
+                calendarEvents[selectedDayString] = [];
+            }
+
+            calendarEvents[selectedDayString].push({
+                course: course,
+                subject: subject,
+                title: title,
+                time: time,
+                desc: desc,
+                author: currentUser.displayName
+            });
+
+            setDoc(calendarDocRef, { events: calendarEvents }).then(() => {
+                document.getElementById('cal-event-form').reset();
+                renderModalEvents(selectedDayString);
+                renderCalendar();
+                Swal.fire({ toast: true, position: 'bottom-end', icon: 'success', title: 'Actividad agendada', showConfirmButton: false, timer: 2000 });
             });
         }
 
@@ -634,7 +893,7 @@
                         <div class="post-avatar">${escapeHTML(post.author.charAt(0).toUpperCase())}</div>
                         <div class="post-meta-text">
                             <span class="author-name">${escapeHTML(post.author)}</span>
-                            <span class="post-date">${post.date} • Asignatura: ${escapeHTML(post.subject)}</span>
+                            <span class="post-date">${post.date} • Asignatura/Taller: ${escapeHTML(post.subject)}</span>
                         </div>
                     </div>
                 </div>
@@ -648,38 +907,6 @@
                 </form>`;
                 container.appendChild(card);
             });
-        }
-
-        // DIBUJA EL CALENDARIO DEL MES EN CURSO TOTALMENTE CON JAVASCRIPT NATIVO
-        function renderCalendar() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = now.getMonth();
-            
-            const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-            document.getElementById('mini-cal-month').textContent = `${monthNames[month]} ${year}`;
-            
-            const firstDayIndex = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
-            const grid = document.getElementById('calendar-days-grid');
-            grid.innerHTML = `
-                <div class="mini-day-name">L</div><div class="mini-day-name">M</div><div class="mini-day-name">M</div>
-                <div class="mini-day-name">J</div><div class="mini-day-name">V</div><div class="mini-day-name">S</div>
-                <div class="mini-day-name">D</div>
-            `;
-            
-            // Ajustar desfase de días (Semana empieza en Lunes)
-            let offset = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
-            for(let i = 0; i < offset; i++) {
-                grid.innerHTML += `<div></div>`;
-            }
-            
-            const todayDate = now.getDate();
-            for(let d = 1; d <= daysInMonth; d++) {
-                const activeClass = (d === todayDate) ? 'active' : '';
-                grid.innerHTML += `<div class="mini-day ${activeClass}">${d}</div>`;
-            }
         }
 
         function escapeHTML(str) { 
